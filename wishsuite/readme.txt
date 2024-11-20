@@ -2,8 +2,8 @@
 Contributors: htplugins, hasthemes, tarekht, zenaulislam, aslamhasib
 Tags: woocommerce, wishlist, product wishlist, wishsuite, woocommerce wishlist
 Requires at least: 5.0
-Tested up to: 6.6
-Stable tag: 1.4.3
+Tested up to: 6.7
+Stable tag: 1.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -105,6 +105,10 @@ Needs assistance to use this plugin?
 Feel free to [Contact us](https://hasthemes.com/contact-us/)
 
 == Changelog ==
+
+= Version: 1.4.4 - Date: 2024-11-20 =
+* Fixed: Hidden quantity field in wishlist table issue.
+* Compatibility With WooCommerce Latest Version.
 
 = Version: 1.4.3 - Date: 2024-08-25 =
 * Fixed: Undefined array key "wishsuite_temp_user_id" issue.

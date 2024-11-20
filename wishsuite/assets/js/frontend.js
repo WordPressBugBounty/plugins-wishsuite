@@ -422,5 +422,20 @@
         $(target_row).find('.wishsuite-product-image img').wc_set_variation_attr('sizes',image.sizes);
     }
 
+    // Make quantity visible if it's hidden.
+    $('.wishsuite-product-quantity').each(function() {
+        const $quantityDataType = $(this).find('[data-type]');
+        let $dataType = 'type-2';
+        if($quantityDataType.length) {
+            $dataType = $quantityDataType.data('type');
+        }
+        const $hiddenQuantity = $(this).find('input[type="hidden"]');
+        if($hiddenQuantity) {
+            const $quantityWrap = $hiddenQuantity.closest('.hidden');
+            $quantityWrap.removeClass('hidden').attr('data-type', $dataType);
+            $hiddenQuantity.attr('type', 'number');
+        }
+    });
+
 
 })(jQuery);
