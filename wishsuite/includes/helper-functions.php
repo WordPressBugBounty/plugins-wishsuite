@@ -64,19 +64,51 @@ function wishsuite_get_post_list( $post_type = 'page' ){
  * @return [Template path]
  */
 function wishsuite_locate_template( $tmp_name ) {
+    // Step 1: Basic input validation
+    if (empty($tmp_name) || !is_string($tmp_name)) {
+        return false;
+    }
+    // Step 2: Sanitize template name and prevent directory traversal
+    $tmp_name = sanitize_file_name($tmp_name);
+    // Step 3: Define allowed template locations
     $woo_tmp_base = WC()->template_path();
+    $template_locations = [
+        [
+            'path' => $woo_tmp_base . $tmp_name,
+            'base' => WP_CONTENT_DIR . '/themes/' . get_template(),
+            'type' => 'woo'
+        ],
+        [
+            'path' => '/' . $tmp_name,
+            'base' => get_template_directory(),
+            'type' => 'theme'
+        ],
+        [
+            'path' => 'includes/templates/' . $tmp_name,
+            'base' => WISHSUITE_DIR,
+            'type' => 'plugin'
+        ]
+    ];
 
-    $woo_tmp_path     = $woo_tmp_base . $tmp_name; //active theme directory/woocommerce/
-    $theme_tmp_path   = '/' . $tmp_name; //active theme root directory
-    $plugin_tmp_path  = WISHSUITE_DIR . 'includes/templates/' . $tmp_name;
-
-    $located = locate_template( [ $woo_tmp_path, $theme_tmp_path ] );
-
-    if ( ! $located && file_exists( $plugin_tmp_path ) ) {
-        return apply_filters( 'wishsuite_locate_template', $plugin_tmp_path, $tmp_name );
+    // Step 4: Validate and locate template
+    foreach ($template_locations as $location) {
+        $full_path = realpath($location['base'] . '/' . $location['path']);
+        $base_path = realpath($location['base']);
+        
+        // Ensure path exists and is within allowed directory
+        if ($full_path && $base_path && strpos($full_path, $base_path) === 0) {
+            if ($location['type'] === 'woo' || $location['type'] === 'theme') {
+                $located = locate_template([$location['path']], false);
+                if ($located) {
+                    return apply_filters('wishsuite_locate_template', $located, $tmp_name);
+                }
+            } else if (file_exists($full_path)) {
+                return apply_filters('wishsuite_locate_template', $full_path, $tmp_name);
+            }
+        }
     }
 
-    return apply_filters( 'wishsuite_locate_template', $located, $tmp_name );
+    return apply_filters( 'wishsuite_locate_template', false, $tmp_name );
 }
 
 /**
@@ -87,7 +119,14 @@ function wishsuite_locate_template( $tmp_name ) {
  * @return [void]
  */
 function wishsuite_get_template( $tmp_name, $args = null, $echo = true ) {
-    $located = wishsuite_locate_template( $tmp_name );
+    $located = wishsuite_locate_template($tmp_name);
+    if (!$located) {
+        return;
+    }
+
+    if (!is_readable($located)) {
+        return;
+    }
 
     if ( $args && is_array( $args ) ) {
         extract( $args );
@@ -95,8 +134,16 @@ function wishsuite_get_template( $tmp_name, $args = null, $echo = true ) {
 
     if ( $echo !== true ) { ob_start(); }
 
-    // include file located.
-    include( $located );
+    try {
+        include $located;
+    } catch (Exception $e) {
+        error_log('WishSuite template error: ' . $e->getMessage());
+        if ($echo !== true) {
+            ob_end_clean();
+            return '';
+        }
+        return;
+    }
 
     if ( $echo !== true ) { return ob_get_clean(); }
 
