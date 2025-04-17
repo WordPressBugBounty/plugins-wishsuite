@@ -5,13 +5,13 @@
  * Plugin URI: https://hasthemes.com/plugins/
  * Author: HasThemes
  * Author URI: https://hasthemes.com/
- * Version: 1.4.5
+ * Version: 1.4.6
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wishsuite
  * Domain Path: /languages
  * Requires Plugins: woocommerce
- * WC tested up to: 9.7.1
+ * WC tested up to: 9.8.1
  */
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -25,7 +25,7 @@ final class WishSuite_Base{
      *
      * @var string
      */
-    const version = '1.4.5';
+    const version = '1.4.6';
 
     /**
      * [$_instance]

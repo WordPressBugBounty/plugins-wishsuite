@@ -60,7 +60,7 @@ class Dashboard {
         $this->redirect_option_page();
 
         // Recommended plugin
-        $this->plugin_recommendations();
+        add_action('init', [ $this, 'plugin_recommendations' ]);
 
     }
 

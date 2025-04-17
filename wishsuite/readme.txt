@@ -2,8 +2,8 @@
 Contributors: htplugins, hasthemes, tarekht, zenaulislam, aslamhasib
 Tags: woocommerce, wishlist, product wishlist, wishsuite, woocommerce wishlist
 Requires at least: 5.0
-Tested up to: 6.7
-Stable tag: 1.4.5
+Tested up to: 6.8
+Stable tag: 1.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -105,6 +105,10 @@ Needs assistance to use this plugin?
 Feel free to [Contact us](https://hasthemes.com/contact-us/)
 
 == Changelog ==
+
+= Version: 1.4.6 - Date: 2025-04-17 =
+* Compatibility With WordPress Latest Version.
+* Compatibility With WooCommerce Latest Version.
 
 = Version: 1.4.5 - Date: 2025-03-05 =
 * Fixed: "wishsuite_button" shortcode "template_name" parameter path sanitization issue.
