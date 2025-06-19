@@ -157,7 +157,7 @@
 
                         const {html, total_pages, current_page} = response.data;
 
-                        $('.wishsuite-table-content').closest('.entry-content').html(html);
+                        $('.wishsuite-table-content').replaceWith(html);
                         $('.wishsuite-pagination .page-numbers').html(generatePagination(current_page ? +current_page : +currentPage, total_pages))
 
                         // Update url current page exist in response data.

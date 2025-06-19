@@ -48,18 +48,22 @@ class Notices {
                 return;
             }
             $activation_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $woocommerce . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $woocommerce );
-            $message = sprintf( __( '%1$sWishSuite%2$s requires %1$s"WooCommerce"%2$s plugin to be active. Please activate WooCommerce to continue.', 'wishsuite' ), '<strong>', '</strong>');
+            $message = sprintf( 
+                /* translators: %1$s: Strong tag, %2$s: Plugin name. */
+                __( '%1$sWishSuite%2$s requires %1$s"WooCommerce"%2$s plugin to be active. Please activate WooCommerce to continue.', 'wishsuite' ), '<strong>', '</strong>');
             $button_text = __( 'Activate WooCommerce', 'wishsuite' );
         } else {
             if( ! current_user_can( 'activate_plugins' ) ) {
                 return;
             }
             $activation_url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=woocommerce' ), 'install-plugin_woocommerce' );
-            $message = sprintf( __( '%1$sWishSuite%2$s requires %1$s"WooCommerce"%2$s plugin to be installed and activated. Please install WooCommerce to continue.', 'wishsuite' ), '<strong>', '</strong>' );
+            $message = sprintf( 
+                /* translators: %1$s: Strong tag, %2$s: Strong tag. */
+                __( '%1$sWishSuite%2$s requires %1$s"WooCommerce"%2$s plugin to be installed and activated. Please install WooCommerce to continue.', 'wishsuite' ), '<strong>', '</strong>' );
             $button_text = __( 'Install WooCommerce', 'wishsuite' );
         }
         $button = '<p><a href="' . $activation_url . '" class="button-primary">' . $button_text . '</a></p>';
-        printf( '<div class="error"><p>%1$s</p>%2$s</div>', __( $message ), $button );
+        printf( '<div class="error"><p>%1$s</p>%2$s</div>', $message, $button );
     }
     
 

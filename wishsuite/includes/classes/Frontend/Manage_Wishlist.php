@@ -572,7 +572,7 @@ class Manage_Wishlist {
                 <div class="wishsuite-quick-cart-form"></div>
             </div>
         <?php endif; ?>
-            <a href="<?php echo $product->add_to_cart_url(); ?>" data-quantity="<?php echo esc_attr( $quentity ); ?>" class="<?php echo $btn_class; ?>" data-product_id="<?php echo $product->get_id(); ?>" rel="nofollow"><?php echo __( $cart_btn, 'wishsuite' );?></a>
+            <a href="<?php echo $product->add_to_cart_url(); ?>" data-quantity="<?php echo esc_attr( $quentity ); ?>" class="<?php echo $btn_class; ?>" data-product_id="<?php echo $product->get_id(); ?>" rel="nofollow"><?php echo esc_html( $cart_btn );?></a>
         <?php
         return ob_get_clean();
 
@@ -588,7 +588,7 @@ class Manage_Wishlist {
         $availability = $product->get_availability();
 
         if( empty( $availability['availability'] ) ) {
-            $availability['availability'] = __( 'In stock', 'woocommerce' );
+            $availability['availability'] = __( 'In stock', 'wishsuite' );
         }
 
         if ( ! empty( $availability['availability'] ) ) {
@@ -638,8 +638,8 @@ class Manage_Wishlist {
         $args = array(
             'base' => str_replace( $total_pages, '%#%', esc_url_raw(get_pagenum_link( $total_pages, false )) ),
             'format' => '?paged=%#%',
-            'prev_text' => __('&laquo;'),
-            'next_text' => __('&raquo;'),
+            'prev_text' => '&laquo;',
+            'next_text' => '&raquo;',
             'total' => $total_pages,
             'current' => $current_page,
             'show_all' => false,

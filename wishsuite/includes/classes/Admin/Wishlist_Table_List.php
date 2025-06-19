@@ -107,11 +107,13 @@ class Wishlist_Table_List extends WP_List_Table
             printf('<option value="%1$s" %2$s>%3$s</option>',
                 '',
                 $user_id === '' ? 'selected' : '',
-                esc_html__('All User Items')
+                esc_html__('All User Items', 'wishsuite')
             );
             foreach ($data as $item) {
                 $user = get_userdata($item['user_id']);
-                $name = $user ? $user->display_name : __('Guest' . $item['user_id'], 'wishsuite');
+                $name = $user ? $user->display_name : printf( 
+                    /* translators: %s: User ID. */
+                    __( 'Guest %s', 'wishsuite' ), $item['user_id'] );
                 printf('<option value="%1$s" %2$s>%3$s</option>',
                     esc_attr($item['user_id']),
                     $user_id === $item['user_id'] ? 'selected' : '',
@@ -176,7 +178,9 @@ class Wishlist_Table_List extends WP_List_Table
     }
     public function column_author($item){
         $user = get_userdata($item['user_id']);
-        $name = $user ? $user->display_name : __('Guest ' . $item['user_id'], 'wishsuite');
+        $name = $user ? $user->display_name : printf( 
+            /* translators: %s: User ID. */
+            __( 'Guest %s', 'wishsuite' ), $item['user_id'] );
         return sprintf('<a class="row-title" href="%1$s">%2$s %3$s</a>',
             esc_url(add_query_arg( 'user_id', $item['user_id'], admin_url('admin.php?page=wishsuite') )),
             wp_kses_post(get_avatar($item['user_id'], 40, '', $name)),

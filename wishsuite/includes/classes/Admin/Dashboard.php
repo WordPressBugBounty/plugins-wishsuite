@@ -124,7 +124,7 @@ class Dashboard {
                 $page_slug = !empty( $menu['page_slug'] ) ? $menu['page_slug'] : self::MENU_PAGE_SLUG;
 
                 $submenu[ self::MENU_PAGE_SLUG ][] = array(
-                    esc_html__( $menu['title'], 'wishsuite' ),
+                    esc_html( $menu['title'] ),
                     self::MENU_CAPABILITY,
                     'admin.php?page='.$page_slug.'#'.$menukey,
                 );
