@@ -5,13 +5,13 @@
  * Plugin URI: https://hasthemes.com/plugins/
  * Author: HasThemes
  * Author URI: https://hasthemes.com/
- * Version: 1.4.7
+ * Version: 1.4.8
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wishsuite
  * Domain Path: /languages
  * Requires Plugins: woocommerce
- * WC tested up to: 9.8.1
+ * WC tested up to: 10.1.2
  */
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -25,7 +25,7 @@ final class WishSuite_Base{
      *
      * @var string
      */
-    const version = '1.4.7';
+    const version = '1.4.8';
 
     /**
      * [$_instance]
@@ -124,6 +124,21 @@ final class WishSuite_Base{
         // let's filter the woocommerce image size
         add_filter( 'woocommerce_get_image_size_wishsuite-image', [ $this, 'wc_image_filter_size' ], 10, 1 );
         
+
+        // let's filter the speculation rules
+        add_filter( 'wp_speculation_rules_href_exclude_paths', function( $exclude_paths ) {
+            $wishlist_page_id = wishsuite_get_option( 'wishlist_page', 'wishsuite_table_settings_tabs' );
+            if ( $wishlist_page_id ) {
+                $wishlist_page_url = get_permalink( $wishlist_page_id );
+                $wishlist_path = parse_url( $wishlist_page_url, PHP_URL_PATH );
+                if ( $wishlist_path ) {
+                    $wishlist_path = trailingslashit( $wishlist_path );
+                    $exclude_paths[] = "{$wishlist_path}*";
+                }
+            }
+            var_dump($exclude_paths);
+            return $exclude_paths;
+        });
 
     }
 
