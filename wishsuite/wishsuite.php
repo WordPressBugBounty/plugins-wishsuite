@@ -5,7 +5,7 @@
  * Plugin URI: https://hasthemes.com/plugins/
  * Author: HasThemes
  * Author URI: https://hasthemes.com/
- * Version: 1.4.8
+ * Version: 1.4.9
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wishsuite
@@ -25,7 +25,7 @@ final class WishSuite_Base{
      *
      * @var string
      */
-    const version = '1.4.8';
+    const version = '1.4.9';
 
     /**
      * [$_instance]
@@ -136,7 +136,6 @@ final class WishSuite_Base{
                     $exclude_paths[] = "{$wishlist_path}*";
                 }
             }
-            var_dump($exclude_paths);
             return $exclude_paths;
         });
 
