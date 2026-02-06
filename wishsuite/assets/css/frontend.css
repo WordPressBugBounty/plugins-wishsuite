@@ -1,3 +1,8 @@
+/* Block theme support */
+.wc-block-product-template li.wc-block-product.product {
+    position: relative;
+}
+
 /* Wishlist Button */
 a.wishsuite-addtocart.loading{
     opacity: .25;

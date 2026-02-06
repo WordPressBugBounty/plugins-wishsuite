@@ -84,9 +84,19 @@ class Shortcode {
         $button_class = array(
             'wishsuite-btn',
             'wishsuite-button',
-            'wishsuite-shop-'.esc_attr($shop_page_btn_position),
-            'wishsuite-product-'.esc_attr($product_page_btn_position),
         );
+
+        // Context-aware classes: shop class only in loops, product class on single product pages
+        $is_single_product = is_product() || is_singular( 'product' );
+        $in_loop = wc_get_loop_prop( 'name' ) || doing_action( 'woocommerce_after_shop_loop_item' ) || doing_action( 'woocommerce_before_shop_loop_item' );
+
+        if ( $is_single_product && ! $in_loop ) {
+            // Single product page (not in a loop) - use product class only
+            $button_class[] = 'wishsuite-product-'.esc_attr($product_page_btn_position);
+        } else {
+            // In a product loop (shop, archives, related products) - use shop class only
+            $button_class[] = 'wishsuite-shop-'.esc_attr($shop_page_btn_position);
+        }
 
         if( $button_style === 'themestyle' ){
             $button_class[] = 'button';
@@ -133,6 +143,14 @@ class Shortcode {
             'template_name'     => ( $has_product === true ) ? 'exist' : 'add',
         );
         $atts = shortcode_atts( $default_atts, $atts, $content );
+
+        // Sanitize shortcode attributes to prevent XSS
+        // Uses custom allowed HTML that includes SVG elements for button icons
+        $allowed_html = $this->get_allowed_button_html();
+        $atts['button_text'] = wp_kses( $atts['button_text'], $allowed_html );
+        $atts['button_added_text'] = wp_kses( $atts['button_added_text'], $allowed_html );
+        $atts['button_exist_text'] = wp_kses( $atts['button_exist_text'], $allowed_html );
+
         return Manage_Wishlist::instance()->button_html( $atts );
 
     }
@@ -251,6 +269,43 @@ class Shortcode {
 
         return $button_icon.$default_loader;
 
+    }
+
+    /**
+     * Get allowed HTML tags for button text sanitization (includes SVG)
+     * @return array
+     */
+    private function get_allowed_button_html() {
+        $allowed = wp_kses_allowed_html( 'post' );
+
+        // Add SVG support for button icons
+        $svg_args = array(
+            'svg' => array(
+                'class'             => true,
+                'id'                => true,
+                'xmlns'             => true,
+                'width'             => true,
+                'height'            => true,
+                'viewbox'           => true,
+                'fill'              => true,
+                'stroke'            => true,
+                'stroke-width'      => true,
+                'style'             => true,
+                'enable-background' => true,
+            ),
+            'g' => array(
+                'class' => true,
+                'id'    => true,
+                'fill'  => true,
+            ),
+            'path' => array(
+                'class' => true,
+                'd'     => true,
+                'fill'  => true,
+            ),
+        );
+
+        return array_merge( $allowed, $svg_args );
     }
 
 

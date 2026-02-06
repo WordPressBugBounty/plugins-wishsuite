@@ -2,8 +2,8 @@
 Contributors: htplugins, hasthemes, tarekht, zenaulislam, aslamhasib
 Tags: woocommerce, wishlist, product wishlist, wishsuite, woocommerce wishlist
 Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 1.4.9
+Tested up to: 6.9
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -105,6 +105,18 @@ Needs assistance to use this plugin?
 Feel free to [Contact us](https://hasthemes.com/contact-us/)
 
 == Changelog ==
+
+= Version: 1.5.2 - Date: 2025-12-14 =
+* Fixed: Escaping issue in wishsuite_button shortcode.
+* Compatibility With WooCommerce Latest Version.
+
+= Version: 1.5.1 - Date: 2025-10-28 =
+* Fixed: Wishlist button position issue with Ever Compare plugin.
+* Compatibility With WooCommerce Latest Version.
+
+= Version: 1.5.0 - Date: 2025-10-20 =
+* Added: Full support for WooCommerce Product blocks.
+* Fixed: Minor css issues with wishlist button positions.
 
 = Version: 1.4.9 - Date: 2025-09-22 =
 * Fixed: debug data shown for logged out users.

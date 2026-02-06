@@ -12,6 +12,24 @@ class Manage_Wishlist {
     private static $_instance = null;
 
     /**
+     * Track if button was added via block rendering for single product pages
+     * @var bool
+     */
+    private $button_added_via_blocks = false;
+
+    /**
+     * Track product IDs that had buttons added via block rendering (for loops)
+     * @var array
+     */
+    private $products_with_block_buttons = array();
+
+    /**
+     * Track if cart button positions were handled by blocks on single product
+     * @var bool
+     */
+    private $cart_position_handled_by_blocks = false;
+
+    /**
      * [instance] Initializes a singleton instance
      * @return [Manage_Wishlist]
      */
@@ -21,12 +39,15 @@ class Manage_Wishlist {
         }
         return self::$_instance;
     }
-    
+
     /**
      * Initialize the class
      */
     private function __construct() {
         add_action( 'init', [ $this, 'button_manager' ] );
+
+        // Block support - only affects pages using blocks
+        add_filter( 'render_block', [ $this, 'handle_block_rendering' ], 10, 2 );
 
         // Remove wishlist item after add to cart.
         // add_action( 'woocommerce_add_to_cart', [ $this, 'remove_wishlist_after_add_to_cart' ], 10, 6 );
@@ -163,6 +184,10 @@ class Manage_Wishlist {
 
         $enable_btn         = wishsuite_get_option( 'btn_show_shoppage', 'wishsuite_settings_tabs', 'off' );
         $product_enable_btn = wishsuite_get_option( 'btn_show_productpage', 'wishsuite_settings_tabs', 'on' );
+
+        if(function_exists('wp_is_block_theme') && wp_is_block_theme() && $product_page_btn_position === 'before_cart_btn' ){
+            return;
+        }
         
         // Shop Button Position
         if( $shop_page_btn_position != 'use_shortcode' && $enable_btn == 'on' ){
@@ -225,7 +250,184 @@ class Manage_Wishlist {
      * @return [void]
      */
     public function button_print(){
+        $current_action = current_action();
+
+        // Cart button hooks
+        $cart_button_hooks = [
+            'woocommerce_before_add_to_cart_button',
+            'woocommerce_after_add_to_cart_button'
+        ];
+
+        // PRIORITY CHECK: If cart position was already handled by blocks, skip completely
+        // This flag is set when blocks add the button, so traditional hooks should not fire
+        if ( in_array( $current_action, $cart_button_hooks ) ) {
+            if ( $this->cart_position_handled_by_blocks ) {
+                return; // Blocks already handled this position
+            }
+
+            // Also skip if currently rendering blocks (blocks will handle it)
+            if ( doing_filter( 'render_block' ) ) {
+                return;
+            }
+        }
+
+        // For non-cart positions: Allow after_summary and after_thumbnail during block rendering
+        if ( doing_filter( 'render_block' ) ) {
+            $allowed_during_blocks = [
+                'woocommerce_after_single_product_summary',
+                'woocommerce_product_thumbnails'
+            ];
+
+            if ( ! in_array( $current_action, $allowed_during_blocks ) ) {
+                return;
+            }
+        }
+
+        // Check if button was already added for this product via blocks
+        global $product;
+        if ( $product && is_a( $product, 'WC_Product' ) ) {
+            $product_id = $product->get_id();
+            if ( in_array( $product_id, $this->products_with_block_buttons ) ) {
+                return; // Already added via block rendering
+            }
+        }
+
+        // Check if button was already added on single product via blocks
+        if ( $this->button_added_via_blocks && ( is_product() || is_singular( 'product' ) ) ) {
+            return; // Already added via block rendering
+        }
+
         echo do_shortcode( '[wishsuite_button]' );
+    }
+
+    /**
+     * Handle block rendering - only executes when blocks are being rendered
+     *
+     * @param string $block_content The block content
+     * @param array $block The block data
+     * @return string Modified block content
+     */
+    public function handle_block_rendering( $block_content, $block ) {
+        // Early return - not a WooCommerce product block
+        if ( ! $this->is_woocommerce_product_block( $block ) ) {
+            return $block_content;
+        }
+
+        // Get block name
+        $block_name = isset( $block['blockName'] ) ? $block['blockName'] : '';
+
+        // Determine context
+        $is_single_product = is_product() || is_singular( 'product' );
+        $in_loop = wc_get_loop_prop( 'name' ) ? true : false;
+
+        // Get settings based on context
+        if ( $is_single_product && ! $in_loop ) {
+            $enable_btn = wishsuite_get_option( 'btn_show_productpage', 'wishsuite_settings_tabs', 'on' );
+            $btn_position = wishsuite_get_option( 'product_btn_position', 'wishsuite_settings_tabs', 'after_cart_btn' );
+        } else {
+            $enable_btn = wishsuite_get_option( 'btn_show_shoppage', 'wishsuite_settings_tabs', 'off' );
+            $btn_position = wishsuite_get_option( 'shop_btn_position', 'wishsuite_settings_tabs', 'after_cart_btn' );
+        }
+
+        // Early return - button not enabled
+        if ( $enable_btn !== 'on' ) {
+            return $block_content;
+        }
+
+        // Early return - using shortcode or custom position
+        if ( in_array( $btn_position, [ 'use_shortcode', 'custom_position' ] ) ) {
+            return $block_content;
+        }
+
+        // Handle cart button blocks (before/after cart button)
+        if ( in_array( $block_name, [ 'woocommerce/product-button', 'woocommerce/add-to-cart-form' ] ) ) {
+            if ( in_array( $btn_position, [ 'before_cart_btn', 'after_cart_btn' ] ) ) {
+                // Set flag IMMEDIATELY to prevent traditional hooks from adding button
+                if ( $is_single_product && ! $in_loop ) {
+                    $this->cart_position_handled_by_blocks = true;
+                }
+                return $this->inject_button_into_block( $block_content, $block, $btn_position );
+            }
+        }
+
+        // Handle image blocks (top_thumbnail position)
+        if ( $btn_position === 'top_thumbnail' && in_array( $block_name, [ 'woocommerce/product-image', 'core/post-featured-image' ] ) ) {
+            return $this->inject_button_into_block( $block_content, $block, $btn_position );
+        }
+
+        return $block_content;
+    }
+
+    /**
+     * Check if block is a WooCommerce product block
+     *
+     * @param array $block Block data
+     * @return bool
+     */
+    private function is_woocommerce_product_block( $block ) {
+        // Check block name
+        if ( isset( $block['blockName'] ) && strpos( $block['blockName'], 'woocommerce/' ) === 0 ) {
+            return true;
+        }
+
+        // Check for WooCommerce namespace
+        if ( isset( $block['attrs']['__woocommerceNamespace'] ) ) {
+            return true;
+        }
+
+        // Check for product context
+        if ( isset( $block['context']['postId'] ) ) {
+            $post = get_post( $block['context']['postId'] );
+            if ( $post && $post->post_type === 'product' ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Inject wishlist button into block content
+     *
+     * @param string $block_content Block content
+     * @param array $block Block data
+     * @param string $position Button position
+     * @return string Modified content
+     */
+    private function inject_button_into_block( $block_content, $block, $position ) {
+        $button_html = do_shortcode( '[wishsuite_button]' );
+
+        if ( empty( $button_html ) ) {
+            return $block_content;
+        }
+
+        // Track that we added the button
+        if ( is_product() || is_singular( 'product' ) ) {
+            $this->button_added_via_blocks = true;
+
+            // Track if cart button positions were handled by blocks
+            if ( in_array( $position, [ 'before_cart_btn', 'after_cart_btn' ] ) ) {
+                $this->cart_position_handled_by_blocks = true;
+            }
+        }
+
+        // Track product ID if in loop
+        if ( isset( $block['context']['postId'] ) ) {
+            $this->products_with_block_buttons[] = $block['context']['postId'];
+        }
+
+        // Inject based on position
+        switch ( $position ) {
+            case 'before_cart_btn':
+                return $button_html . $block_content;
+
+            case 'top_thumbnail':
+                return $block_content . $button_html;
+
+            case 'after_cart_btn':
+            default:
+                return $block_content . $button_html;
+        }
     }
 
     /**
