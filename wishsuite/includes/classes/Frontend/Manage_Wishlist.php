@@ -30,6 +30,12 @@ class Manage_Wishlist {
     private $cart_position_handled_by_blocks = false;
 
     /**
+     * Request-level cache for wishlist product IDs
+     * @var array|null
+     */
+    private static $cached_wishlist = null;
+
+    /**
      * [instance] Initializes a singleton instance
      * @return [Manage_Wishlist]
      */
@@ -59,6 +65,7 @@ class Manage_Wishlist {
      * @param [int] $id
      */
     public function add_product( $id ){
+        self::$cached_wishlist = null;
 
         $user_id = get_current_user_id();
         $add_status = false;
@@ -103,6 +110,7 @@ class Manage_Wishlist {
 
         }
 
+        self::$cached_wishlist = null;
         return $add_status;
 
     }
@@ -113,6 +121,8 @@ class Manage_Wishlist {
      * @return [void]
      */
     public function remove_product( $id ){
+        self::$cached_wishlist = null;
+
         $user_id = get_current_user_id();
         $delete_status = false;
 
@@ -154,6 +164,7 @@ class Manage_Wishlist {
 
         }
 
+        self::$cached_wishlist = null;
         return $delete_status;
     }
 
@@ -478,21 +489,27 @@ class Manage_Wishlist {
      */
     public function get_wishlist_products(){
 
+        if ( self::$cached_wishlist !== null ) {
+            return self::$cached_wishlist;
+        }
+
         if( is_user_logged_in() ){
             $items = \WishSuite\Manage_Data::instance()->read();
             $ids = array();
             foreach ( $items as $itemkey => $item ) {
                 $ids[] = $item['product_id'];
             }
+            self::$cached_wishlist = $ids;
             return $ids;
         }else{
             $cookie_name = $this->get_cookie_name();
-            // return isset( $_COOKIE[ $cookie_name ] ) ? array_map( 'sanitize_text_field', json_decode( wp_unslash( $_COOKIE[ $cookie_name ] ), true ) ) : array();
             if( isset( $_COOKIE[ $cookie_name ] ) && is_array( json_decode( wp_unslash( $_COOKIE[ $cookie_name ] ), true ) ) ){
-                return array_map( 'sanitize_text_field', json_decode( wp_unslash( $_COOKIE[ $cookie_name ] ), true ) );
+                $result = array_map( 'sanitize_text_field', json_decode( wp_unslash( $_COOKIE[ $cookie_name ] ), true ) );
             }else{
-                return array();
+                $result = array();
             }
+            self::$cached_wishlist = $result;
+            return $result;
         }
 
     }
@@ -503,13 +520,14 @@ class Manage_Wishlist {
      * @return boolean
      */
     public function is_product_in_wishlist( $id ) {
+        if ( is_user_logged_in() ) {
+            $item = \WishSuite\Manage_Data::instance()->read_single_item( get_current_user_id(), (int) $id );
+            return ! empty( $item );
+        }
+
         $id = (string) $id;
         $list = $this->get_wishlist_products();
-        if ( is_array( $list ) ) {
-            return in_array( $id, $list, true );
-        }else{
-            return false;
-        }
+        return is_array( $list ) && in_array( $id, $list, true );
     }
 
     /**

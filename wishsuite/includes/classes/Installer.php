@@ -49,13 +49,16 @@ class Installer {
             $charset_collate = $wpdb->get_charset_collate();
         }
 
-        $schema = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}wishsuite_list` (
+        $schema = "CREATE TABLE `{$wpdb->prefix}wishsuite_list` (
           `id` bigint( 20 ) unsigned NOT NULL AUTO_INCREMENT,
           `user_id` bigint( 20 ) NULL DEFAULT NULL,
           `product_id` bigint(20) NULL DEFAULT NULL,
           `quantity` int(11) NULL DEFAULT NULL,
           `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-          PRIMARY KEY (`id`)
+          PRIMARY KEY (`id`),
+          KEY `idx_user_id` (`user_id`),
+          KEY `idx_product_id` (`product_id`),
+          KEY `idx_user_product` (`user_id`, `product_id`)
         ) $charset_collate";
 
         if ( ! function_exists( 'dbDelta' ) ) {
@@ -63,6 +66,38 @@ class Installer {
         }
 
         dbDelta( $schema );
+
+        $this->maybe_add_indexes();
+    }
+
+    /**
+     * Add missing indexes to the wishlist table via direct SQL.
+     * Handles existing installs where dbDelta may not have created indexes.
+     *
+     * @return void
+     */
+    public function maybe_add_indexes() {
+        global $wpdb;
+        $table = $wpdb->prefix . 'wishsuite_list';
+
+        if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) !== $table ) {
+            return;
+        }
+
+        $existing = $wpdb->get_results( "SHOW INDEX FROM `{$table}`", ARRAY_A );
+        $existing_names = array_column( $existing, 'Key_name' );
+
+        $indexes = [
+            'idx_user_id'      => '(`user_id`)',
+            'idx_product_id'   => '(`product_id`)',
+            'idx_user_product' => '(`user_id`, `product_id`)',
+        ];
+
+        foreach ( $indexes as $name => $columns ) {
+            if ( ! in_array( $name, $existing_names, true ) ) {
+                $wpdb->query( "ALTER TABLE `{$table}` ADD INDEX `{$name}` {$columns}" );
+            }
+        }
     }
 
     /**

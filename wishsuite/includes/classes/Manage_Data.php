@@ -23,6 +23,28 @@ class Manage_Data {
     }
 
     /**
+     * Sanitize orderby column against a whitelist.
+     *
+     * @param  string $orderby
+     * @return string
+     */
+    private function sanitize_orderby( $orderby ) {
+        $allowed = [ 'id', 'product_id', 'user_id', 'quantity', 'date_added' ];
+        return in_array( $orderby, $allowed, true ) ? $orderby : 'id';
+    }
+
+    /**
+     * Sanitize order direction.
+     *
+     * @param  string $order
+     * @return string
+     */
+    private function sanitize_order( $order ) {
+        $order = strtoupper( $order );
+        return in_array( $order, [ 'ASC', 'DESC' ], true ) ? $order : 'ASC';
+    }
+
+    /**
      * [create]
      * @param  array  $args New argument
      * @return [int] return insert id | update
@@ -92,11 +114,14 @@ class Manage_Data {
         $key          = md5( serialize( array_diff_assoc( $args, $defaults ) ) );
         $cache_key    = "all:$key:$last_changed";
 
+        $orderby = $this->sanitize_orderby( $args['orderby'] );
+        $order   = $this->sanitize_order( $args['order'] );
+
         $sql = $wpdb->prepare(
             "SELECT * FROM {$wpdb->prefix}wishsuite_list
             WHERE user_id = %d
-            ORDER BY %s %s",
-            $args['user_id'], $args['orderby'], $args['order']
+            ORDER BY {$orderby} {$order}",
+            $args['user_id']
         );
 
         $items = wp_cache_get( $cache_key, 'wishsuite' );
@@ -135,13 +160,16 @@ class Manage_Data {
 
         $total_items = (int) $wpdb->get_var($total_items_sql);
 
+        $orderby = $this->sanitize_orderby( $args['orderby'] );
+        $order   = $this->sanitize_order( $args['order'] );
+
         $sql = $wpdb->prepare(
             "SELECT *, COUNT(*) AS product_count
             FROM {$wpdb->prefix}wishsuite_list AS wishlists
             GROUP BY wishlists.product_id
-            ORDER BY %s %s
+            ORDER BY {$orderby} {$order}
             LIMIT %d OFFSET %d",
-            $args['orderby'], $args['order'], $args['limit'], $args['offset']
+            $args['limit'], $args['offset']
         );
         $items = wp_cache_get( $cache_key, 'wishsuite' );
 
@@ -180,13 +208,16 @@ class Manage_Data {
 
         $total_items = (int) $wpdb->get_var($total_items_sql);
 
+        $orderby = $this->sanitize_orderby( $args['orderby'] );
+        $order   = $this->sanitize_order( $args['order'] );
+
         $sql = $wpdb->prepare(
             "SELECT *, COUNT(*) AS product_count
             FROM {$wpdb->prefix}wishsuite_list AS wishlists
             GROUP BY wishlists.user_id
-            ORDER BY %s %s
+            ORDER BY {$orderby} {$order}
             LIMIT %d OFFSET %d",
-            $args['orderby'], $args['order'], $args['limit'], $args['offset']
+            $args['limit'], $args['offset']
         );
         $items = wp_cache_get( $cache_key, 'wishsuite' );
 
@@ -226,13 +257,16 @@ class Manage_Data {
 
         $total_items = $wpdb->get_var($total_items_sql);
 
+        $orderby = $this->sanitize_orderby( $args['orderby'] );
+        $order   = $this->sanitize_order( $args['order'] );
+
         $sql = $wpdb->prepare(
             "SELECT *
             FROM {$wpdb->prefix}wishsuite_list AS wishlists
             WHERE wishlists.user_id = %d
-            ORDER BY %s %s
+            ORDER BY {$orderby} {$order}
             LIMIT %d OFFSET %d",
-            $args['user_id'], $args['orderby'], $args['order'], $args['limit'], $args['offset']
+            $args['user_id'], $args['limit'], $args['offset']
         );
         $items = wp_cache_get( $cache_key, 'wishsuite' );
 

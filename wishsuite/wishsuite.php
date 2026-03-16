@@ -5,7 +5,7 @@
  * Plugin URI: https://hasthemes.com/plugins/
  * Author: HasThemes
  * Author URI: https://hasthemes.com/
- * Version: 1.5.2
+ * Version: 1.5.3
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wishsuite
@@ -25,7 +25,7 @@ final class WishSuite_Base{
      *
      * @var string
      */
-    const version = '1.5.2';
+    const version = '1.5.3';
 
     /**
      * [$_instance]
@@ -51,8 +51,8 @@ final class WishSuite_Base{
         $this->define_constants();
         $this->includes();
         register_activation_hook( WISHSUITE_FILE, [ $this, 'activate' ] );
-        if( empty( get_option('wishsuite_version', '') ) ){
-            $this->activate();
+        if ( version_compare( get_option( 'wishsuite_version', '' ), WISHSUITE_VERSION, '<' ) ) {
+            $this->maybe_upgrade();
         }
         add_action( 'init', [ $this, 'i18n' ] );
         add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
@@ -139,6 +139,18 @@ final class WishSuite_Base{
             return $exclude_paths;
         });
 
+    }
+
+    /**
+     * Run upgrade routines when the plugin version changes.
+     * Only updates the DB schema and version — no page creation or redirects.
+     *
+     * @return void
+     */
+    public function maybe_upgrade() {
+        $installer = new WishSuite\Installer();
+        $installer->create_tables();
+        $installer->add_version();
     }
 
     /**

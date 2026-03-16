@@ -24,6 +24,7 @@ class Wishlist_Table_List extends WP_List_Table
 	private $offset;
 	private $order_by;
 	private $order;
+	private $total_items = 0;
 
 	public function __construct() {
 
@@ -55,13 +56,14 @@ class Wishlist_Table_List extends WP_List_Table
             'order'=>$this->order
         ];
         if($this->user_id === '') {
-            $data = Manage_Data::instance()->getWishlist( $query_args )['items'];
+            $result = Manage_Data::instance()->getWishlist( $query_args );
         }
         if($this->user_id && $this->user_id !== '') {
             $query_args = array_merge($query_args, ['user_id'=>$this->user_id]);
-            $data = Manage_Data::instance()->getWishlistByUserId( $query_args )['items'];
+            $result = Manage_Data::instance()->getWishlistByUserId( $query_args );
         }
-        $this->items= $data;
+        $this->items = $result['items'] ?? [];
+        $this->total_items = $result['total_items'] ?? 0;
 	}
     
 
@@ -209,27 +211,9 @@ class Wishlist_Table_List extends WP_List_Table
 
 	function prepare_items(){
 		$this->_column_headers = array($this->get_columns(),array('id'),$this->get_sortable_columns());
-        $total_items = 0;
-
-        $query_args = [
-            'limit'=>$this->limit,
-            'offset'=>$this->offset,
-            'orderby'=>$this->order_by,
-            'order'=>$this->order
-        ];
-
-        if($this->user_id === '') {
-            $result = Manage_Data::instance()->getWishlist( $query_args );
-            $total_items = $result['total_items'];
-        }
-        if($this->user_id && $this->user_id !== '' ) {
-            $query_args = array_merge($query_args, ['user_id'=>$this->user_id]);
-            $result = Manage_Data::instance()->getWishlistByUserId( $query_args );
-            $total_items = $result['total_items'];
-        }
 
         $this->set_pagination_args( [
-            'total_items' => $total_items,
+            'total_items' => $this->total_items,
             'per_page'    => $this->limit
         ] );
 	}
