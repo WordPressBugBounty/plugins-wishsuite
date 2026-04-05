@@ -3,7 +3,7 @@ Contributors: htplugins, hasthemes, tarekht, zenaulislam, aslamhasib
 Tags: woocommerce, wishlist, product wishlist, wishsuite, woocommerce wishlist
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -105,6 +105,18 @@ Needs assistance to use this plugin?
 Feel free to [Contact us](https://hasthemes.com/contact-us/)
 
 == Changelog ==
+
+= Version: 1.5.4 - Date: 2026-04-05 =
+* Fixed: Escaping issues across admin and frontend templates.
+* Fixed: Guest user name display issue in admin wishlist table.
+* Fixed: Add to cart now checks product status before inserting into cart.
+* Fixed: Undefined cookie index notice for guest users.
+* Fixed: Wishlist count cache collision between different users.
+* Fixed: Cache key collision in single item lookups.
+* Improved: Targeted cache purging with user and product context.
+* Improved: Corrected text domain for translatable strings.
+* Improved: Safer template variable extraction and structured error logging.
+* Compatibility: Declared support for WooCommerce Cart/Checkout Blocks, Product Block Editor, and Product Object Caching.
 
 = Version: 1.5.3 - Date: 2026-03-16 =
 * Improved: Request-level caching for wishlist queries.

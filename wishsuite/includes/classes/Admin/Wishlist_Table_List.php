@@ -113,7 +113,7 @@ class Wishlist_Table_List extends WP_List_Table
             );
             foreach ($data as $item) {
                 $user = get_userdata($item['user_id']);
-                $name = $user ? $user->display_name : printf( 
+                $name = $user ? $user->display_name : sprintf(
                     /* translators: %s: User ID. */
                     __( 'Guest %s', 'wishsuite' ), $item['user_id'] );
                 printf('<option value="%1$s" %2$s>%3$s</option>',
@@ -180,7 +180,7 @@ class Wishlist_Table_List extends WP_List_Table
     }
     public function column_author($item){
         $user = get_userdata($item['user_id']);
-        $name = $user ? $user->display_name : printf( 
+        $name = $user ? $user->display_name : sprintf(
             /* translators: %s: User ID. */
             __( 'Guest %s', 'wishsuite' ), $item['user_id'] );
         return sprintf('<a class="row-title" href="%1$s">%2$s %3$s</a>',

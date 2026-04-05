@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WishSuite - Wishlist for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-19 06:41+0000\n"
+"POT-Creation-Date: 2026-04-02 08:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,16 +16,16 @@ msgstr ""
 "X-Loco-Version: 2.6.6; wp-6.4.3\n"
 "X-Domain: wishsuite"
 
-#: includes/classes/Admin/Admin_Fields.php:115
+#: includes/classes/Admin/Admin_Fields.php:116
 msgid "\"Product added to Wishlist\" Text"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:123
+#: includes/classes/Admin/Admin_Fields.php:124
 msgid "\"Product removed from Wishlist\" Text"
 msgstr ""
 
 #. %1$s: Strong tag, %2$s: Plugin name.
-#: includes/classes/Admin/Notices.php:53
+#: includes/classes/Admin/Notices.php:54
 #, php-format
 msgid ""
 "%1$sWishSuite%2$s requires %1$s\"WooCommerce\"%2$s plugin to be active. "
@@ -33,7 +33,7 @@ msgid ""
 msgstr ""
 
 #. %1$s: Strong tag, %2$s: Strong tag.
-#: includes/classes/Admin/Notices.php:62
+#: includes/classes/Admin/Notices.php:63
 #, php-format
 msgid ""
 "%1$sWishSuite%2$s requires %1$s\"WooCommerce\"%2$s plugin to be installed "
@@ -41,30 +41,30 @@ msgid ""
 msgstr ""
 
 #. %s: Number of installations.
-#: includes/classes/Admin/Recommended_Plugins.php:299
+#: includes/classes/Admin/Recommended_Plugins.php:300
 #, php-format
 msgid "%s Active Installations"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:244
+#: includes/classes/Admin/Recommended_Plugins.php:245
 msgid "Activate"
 msgstr ""
 
-#: includes/classes/Admin/Notices.php:54
+#: includes/classes/Admin/Notices.php:55
 msgid "Activate WooCommerce"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:128
-#: includes/classes/Admin/Recommended_Plugins.php:255
+#: includes/classes/Admin/Recommended_Plugins.php:129
+#: includes/classes/Admin/Recommended_Plugins.php:256
 msgid "Activated"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:127
+#: includes/classes/Admin/Recommended_Plugins.php:128
 msgid "Activating.."
 msgstr ""
 
 #. %s: Number of millions.
-#: includes/classes/Admin/Recommended_Plugins.php:373
+#: includes/classes/Admin/Recommended_Plugins.php:374
 #, php-format
 msgctxt "Active plugin installations"
 msgid "%s+ Million"
@@ -72,55 +72,55 @@ msgid_plural "%s+ Million"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:377
+#: includes/classes/Admin/Recommended_Plugins.php:378
 msgctxt "Active plugin installations"
 msgid "Less Than 10"
 msgstr ""
 
 #: includes/helper-functions.php:181 includes/helper-functions.php:213
-#: includes/classes/Frontend/Manage_Wishlist.php:419
-#: includes/classes/Admin/Admin_Fields.php:361
+#: includes/classes/Frontend/Manage_Wishlist.php:640
+#: includes/classes/Admin/Admin_Fields.php:362
 msgid "Add To Cart"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:665
+#: includes/classes/Admin/Admin_Fields.php:666
 msgid "Add To Cart Button style"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:510
+#: includes/classes/Admin/Admin_Fields.php:511
 msgid "Added Button custom icon"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:497
+#: includes/classes/Admin/Admin_Fields.php:498
 msgid "Added Button icon type"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:199
-#: includes/classes/Admin/Admin_Fields.php:246
+#: includes/classes/Admin/Admin_Fields.php:200
+#: includes/classes/Admin/Admin_Fields.php:247
 msgid "After Add To Cart"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:247
+#: includes/classes/Admin/Admin_Fields.php:248
 msgid "After Image"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:248
+#: includes/classes/Admin/Admin_Fields.php:249
 msgid "After Summary"
 msgstr ""
 
-#: includes/classes/Admin/Wishlist_Table_List.php:85
+#: includes/classes/Admin/Wishlist_Table_List.php:87
 msgid "All"
 msgstr ""
 
-#: includes/classes/Admin/Wishlist_Table_List.php:110
+#: includes/classes/Admin/Wishlist_Table_List.php:112
 msgid "All User Items"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:306
+#: includes/classes/Admin/Admin_Fields.php:307
 msgid "Already exists in the wishlist text"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:307
+#: includes/classes/Admin/Dashboard.php:308
 msgid ""
 "Are you getting frustrated with WooCommerce’s current way of presenting the "
 "variants for your products? Well, say goodbye to dropdowns and start showing "
@@ -131,104 +131,108 @@ msgstr ""
 msgid "Availability"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:568
-#: includes/classes/Admin/Admin_Fields.php:680
-#: includes/classes/Admin/Admin_Fields.php:710
+#: includes/classes/Admin/Admin_Fields.php:569
+#: includes/classes/Admin/Admin_Fields.php:681
+#: includes/classes/Admin/Admin_Fields.php:711
 msgid "Background Color"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:198
-#: includes/classes/Admin/Admin_Fields.php:245
+#: includes/classes/Admin/Admin_Fields.php:199
+#: includes/classes/Admin/Admin_Fields.php:246
 msgid "Before Add To Cart"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:657
-#: includes/classes/Admin/Admin_Fields.php:717
+#: includes/classes/Admin/Admin_Fields.php:658
+#: includes/classes/Admin/Admin_Fields.php:718
 msgid "Border Color"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:612
+#: includes/classes/Admin/Admin_Fields.php:613
 msgid "Border Radius"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:589
-#: includes/classes/Admin/Admin_Fields.php:603
-#: includes/classes/Admin/Admin_Fields.php:617
+#: includes/classes/Admin/Admin_Fields.php:590
+#: includes/classes/Admin/Admin_Fields.php:604
+#: includes/classes/Admin/Admin_Fields.php:618
 msgid "Bottom"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:487
+#: includes/classes/Admin/Admin_Fields.php:488
 msgid "Button custom icon"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:544
+#: includes/classes/Admin/Admin_Fields.php:545
 msgid "Button custom style"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:474
+#: includes/classes/Admin/Admin_Fields.php:475
 msgid "Button icon type"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:53
+#: includes/classes/Admin/Admin_Fields.php:54
 msgid "Button Settings"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:461
+#: includes/classes/Admin/Admin_Fields.php:462
 msgid "Button style"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:98
-#: includes/classes/Admin/Admin_Fields.php:288
+#: includes/classes/Admin/Admin_Fields.php:99
+#: includes/classes/Admin/Admin_Fields.php:289
 msgid "Button Text"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:124
-#: includes/classes/Admin/Recommended_Plugins.php:232
-#: includes/classes/Admin/Recommended_Plugins.php:286
+#: includes/classes/Admin/Recommended_Plugins.php:125
+#: includes/classes/Admin/Recommended_Plugins.php:233
+#: includes/classes/Admin/Recommended_Plugins.php:287
 msgid "Buy Now"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:272
+#: includes/classes/Admin/Recommended_Plugins.php:273
 msgid "By "
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:462
+#: includes/classes/Admin/Settings_Api.php:338
+msgid "Check All"
+msgstr ""
+
+#: includes/classes/Admin/Admin_Fields.php:463
 msgid "Choose a style for the wishlist button from here."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:533
+#: includes/classes/Admin/Admin_Fields.php:534
 msgid "Choose a style for the wishlist notification here."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:521
+#: includes/classes/Admin/Admin_Fields.php:522
 msgid "Choose a style for the wishlist table here."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:475
-#: includes/classes/Admin/Admin_Fields.php:498
+#: includes/classes/Admin/Admin_Fields.php:476
+#: includes/classes/Admin/Admin_Fields.php:499
 msgid "Choose an icon for the wishlist button from here."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:352
+#: includes/classes/Admin/Admin_Fields.php:353
 msgid ""
 "Choose which fields should be presented on the product compare page with "
 "table."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:731
+#: includes/classes/Admin/Admin_Fields.php:732
 msgid "Close Button Color"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:738
+#: includes/classes/Admin/Admin_Fields.php:739
 msgid "Close Button Hover Color"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:552
-#: includes/classes/Admin/Admin_Fields.php:673
+#: includes/classes/Admin/Admin_Fields.php:553
+#: includes/classes/Admin/Admin_Fields.php:674
 msgid "Color"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:343
+#: includes/classes/Admin/Dashboard.php:344
 msgid ""
 "Contact Form7 Extensions plugin is a fantastic WordPress plugin that "
 "enriches the functionalities of Contact Form 7.This all-in-one WordPress "
@@ -240,61 +244,61 @@ msgid ""
 "addition to its basic features."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:724
+#: includes/classes/Admin/Admin_Fields.php:725
 msgid "Content Color"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:485
+#: includes/classes/Admin/Dashboard.php:486
 msgid "Coupon Zen"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:481
-#: includes/classes/Admin/Admin_Fields.php:504
+#: includes/classes/Admin/Admin_Fields.php:482
+#: includes/classes/Admin/Admin_Fields.php:505
 msgid "Custom icon"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:202
-#: includes/classes/Admin/Admin_Fields.php:250
+#: includes/classes/Admin/Admin_Fields.php:203
+#: includes/classes/Admin/Admin_Fields.php:251
 msgid "Custom Position"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:468
-#: includes/classes/Admin/Admin_Fields.php:526
-#: includes/classes/Admin/Admin_Fields.php:538
+#: includes/classes/Admin/Admin_Fields.php:469
+#: includes/classes/Admin/Admin_Fields.php:527
+#: includes/classes/Admin/Admin_Fields.php:539
 msgid "Custom style"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:479
+#: includes/classes/Admin/Dashboard.php:480
 msgid "DataCaptia"
 msgstr ""
 
-#: includes/classes/Admin/Wishlist_Table_List.php:197
+#: includes/classes/Admin/Wishlist_Table_List.php:199
 msgid ""
 "Date Added\n"
 "                "
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:480
-#: includes/classes/Admin/Admin_Fields.php:503
+#: includes/classes/Admin/Admin_Fields.php:481
+#: includes/classes/Admin/Admin_Fields.php:504
 msgid "Default icon"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:466
-#: includes/classes/Admin/Admin_Fields.php:525
-#: includes/classes/Admin/Admin_Fields.php:537
+#: includes/classes/Admin/Admin_Fields.php:467
+#: includes/classes/Admin/Admin_Fields.php:526
+#: includes/classes/Admin/Admin_Fields.php:538
 msgid "Default style"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:233
-#: includes/classes/Admin/Admin_Fields.php:281
+#: includes/classes/Admin/Admin_Fields.php:234
+#: includes/classes/Admin/Admin_Fields.php:282
 msgid "Default: 10"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:141
+#: includes/classes/Admin/Admin_Fields.php:142
 msgid "Delete Guest Wishlist Items"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:148
+#: includes/classes/Admin/Admin_Fields.php:149
 msgid "Delete Guest Wishlist Items After"
 msgstr ""
 
@@ -306,145 +310,145 @@ msgstr ""
 msgid "Dimensions"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:421
+#: includes/classes/Admin/Dashboard.php:422
 msgid "Docus Pro"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:473
+#: includes/classes/Admin/Dashboard.php:474
 msgid "Docus – YouTube Video Playlist"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:225
+#: includes/classes/Admin/Admin_Fields.php:226
 msgid "e.g: woocommerce_after_shop_loop_item_title"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:273
+#: includes/classes/Admin/Admin_Fields.php:274
 msgid "e.g: woocommerce_after_single_product_summary"
 msgstr ""
 
 #: includes/templates/wishsuite-social-share.php:30
-#: includes/classes/Admin/Admin_Fields.php:438
+#: includes/classes/Admin/Admin_Fields.php:439
 msgid "Email"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:424
+#: includes/classes/Admin/Dashboard.php:425
 msgid ""
 "Embedding a YouTube playlist into your website plays a vital role to curate "
 "your content into several categories and make your web content more engaging "
 "and popular by keeping the visitors on your website for a longer period."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:375
+#: includes/classes/Admin/Admin_Fields.php:376
 msgid "Empty table text"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:430
+#: includes/classes/Admin/Admin_Fields.php:431
 msgid "Enable share buttons"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:412
+#: includes/classes/Admin/Admin_Fields.php:413
 msgid "Enable social share button"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:415
+#: includes/classes/Admin/Admin_Fields.php:416
 msgid "Enable social share button."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:93
+#: includes/classes/Admin/Admin_Fields.php:94
 msgid ""
 "Enable this option to allow only the logged-in users to use the Wishlist "
 "feature."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:110
+#: includes/classes/Admin/Admin_Fields.php:111
 msgid ""
 "Enable this option to display a notification when a client adds or removes a "
 "product from the wishlist."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:144
+#: includes/classes/Admin/Admin_Fields.php:145
 msgid ""
 "Enable this option to remove items added by guest or unregistered users to "
 "wishlist."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:336
+#: includes/classes/Admin/Admin_Fields.php:337
 msgid "Enable/Disable Quick Add to Cart"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:298
+#: includes/classes/Admin/Admin_Fields.php:299
 msgid "Enter the product added text."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:184
+#: includes/classes/Admin/Admin_Fields.php:185
 msgid "Enter the product remove text."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:383
+#: includes/classes/Admin/Admin_Fields.php:384
 msgid "Enter your required image size."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:421
+#: includes/classes/Admin/Admin_Fields.php:422
 msgid "Enter your social share button title."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:289
+#: includes/classes/Admin/Admin_Fields.php:290
 msgid "Enter your wishlist button text."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:99
+#: includes/classes/Admin/Admin_Fields.php:100
 msgid ""
 "Enter your wishlist button text. It will appear when the user is not logged "
 "in."
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:225
+#: includes/classes/Admin/Dashboard.php:226
 msgid "Extensions For CF7"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:340
+#: includes/classes/Admin/Dashboard.php:341
 msgid "Extensions For CF7 Pro"
 msgstr ""
 
 #: includes/templates/wishsuite-social-share.php:14
 #: includes/templates/wishsuite-social-share.php:58
-#: includes/classes/Admin/Admin_Fields.php:434
-#: includes/classes/Admin/Admin_Fields.php:446
+#: includes/classes/Admin/Admin_Fields.php:435
+#: includes/classes/Admin/Admin_Fields.php:447
 msgid "Facebook"
 msgstr ""
 
-#: includes/classes/Manage_Data.php:63
+#: includes/classes/Manage_Data.php:86
 msgid "Failed to insert data"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:449
+#: includes/classes/Admin/Dashboard.php:450
 msgid "Faster YouTube Embed"
 msgstr ""
 
-#: includes/classes/Admin/Wishlist_Table_List.php:124
+#: includes/classes/Admin/Wishlist_Table_List.php:126
 msgid "Filter"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:48
+#: includes/classes/Admin/Admin_Fields.php:49
 msgid "General Settings"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:394
+#: includes/classes/Admin/Dashboard.php:395
 msgid "Google Place Review"
 msgstr ""
 
 #. %s: User ID.
-#: includes/classes/Admin/Wishlist_Table_List.php:116
-#: includes/classes/Admin/Wishlist_Table_List.php:183
+#: includes/classes/Admin/Wishlist_Table_List.php:118
+#: includes/classes/Admin/Wishlist_Table_List.php:185
 #, php-format
 msgid "Guest %s"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:207
+#: includes/classes/Admin/Dashboard.php:208
 msgid "HashBar"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:352
+#: includes/classes/Admin/Dashboard.php:353
 msgid ""
 "HashBar is a WordPress Notification / Alert / Offer Bar plugin which allows "
 "you to create unlimited notification bars to notify your customers. This "
@@ -454,11 +458,11 @@ msgid ""
 "make your notification bar more professional."
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:349
+#: includes/classes/Admin/Dashboard.php:350
 msgid "HashBar Pro"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:229
+#: includes/classes/Admin/Recommended_Plugins.php:230
 msgid "HasTheme"
 msgstr ""
 
@@ -466,87 +470,87 @@ msgstr ""
 msgid "HasThemes"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:642
+#: includes/classes/Admin/Admin_Fields.php:643
 msgid "Heading Background Color"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:649
+#: includes/classes/Admin/Admin_Fields.php:650
 msgid "Heading Border Color"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:634
+#: includes/classes/Admin/Admin_Fields.php:635
 msgid "Heading Color"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:387
+#: includes/classes/Admin/Admin_Fields.php:388
 msgid "Height"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:224
-#: includes/classes/Admin/Admin_Fields.php:272
+#: includes/classes/Admin/Admin_Fields.php:225
+#: includes/classes/Admin/Admin_Fields.php:273
 msgid "Hook name"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:232
-#: includes/classes/Admin/Admin_Fields.php:280
+#: includes/classes/Admin/Admin_Fields.php:233
+#: includes/classes/Admin/Admin_Fields.php:281
 msgid "Hook priority"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:576
-#: includes/classes/Admin/Admin_Fields.php:694
+#: includes/classes/Admin/Admin_Fields.php:577
+#: includes/classes/Admin/Admin_Fields.php:695
 msgid "Hover Background Color"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:560
-#: includes/classes/Admin/Admin_Fields.php:687
+#: includes/classes/Admin/Admin_Fields.php:561
+#: includes/classes/Admin/Admin_Fields.php:688
 msgid "Hover Color"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:412
+#: includes/classes/Admin/Dashboard.php:413
 msgid "HT Click To Call"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:219
+#: includes/classes/Admin/Dashboard.php:220
 msgid "HT Contact Form 7"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:443
+#: includes/classes/Admin/Dashboard.php:444
 msgid "HT Feed"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:201
+#: includes/classes/Admin/Dashboard.php:202
 msgid "HT Mega"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:295
+#: includes/classes/Admin/Dashboard.php:296
 msgid "HT Mega Pro"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:237
+#: includes/classes/Admin/Dashboard.php:238
 msgid "HT Menu"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:376
+#: includes/classes/Admin/Dashboard.php:377
 msgid "HT Menu Pro"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:243
+#: includes/classes/Admin/Dashboard.php:244
 msgid "HT Script"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:367
+#: includes/classes/Admin/Dashboard.php:368
 msgid "HT Script Pro"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:213
+#: includes/classes/Admin/Dashboard.php:214
 msgid "HT Slider For Elementor"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:385
+#: includes/classes/Admin/Dashboard.php:386
 msgid "HT Slider Pro For Elementor"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:388
+#: includes/classes/Admin/Dashboard.php:389
 msgid ""
 "HT Slider Pro is a plugin to create a slider for WordPress websites easily "
 "using the Elementor page builder. 80+ prebuild slides/templates are included "
@@ -555,15 +559,15 @@ msgid ""
 "box layout option are included."
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:497
+#: includes/classes/Admin/Dashboard.php:498
 msgid "HT Social Share"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:231
+#: includes/classes/Admin/Dashboard.php:232
 msgid "HT WPForms"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:415
+#: includes/classes/Admin/Dashboard.php:416
 msgid ""
 "HT – Click to Call is a lightweight WordPress plugin that allows you to add "
 "a floating click to call button on your website. It will offer your website "
@@ -572,7 +576,7 @@ msgid ""
 "seeking more information."
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:298
+#: includes/classes/Admin/Dashboard.php:299
 msgid ""
 "HTMega is an absolute addon for elementor that includes 80+ elements & 360 "
 "Blocks with unlimited variations. HT Mega brings limitless possibilities. "
@@ -587,7 +591,7 @@ msgstr ""
 msgid "https://hasthemes.com/plugins/"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:397
+#: includes/classes/Admin/Dashboard.php:398
 msgid ""
 "If you are searching for a modern and excellent google places review "
 "WordPress plugin to showcase reviews from Google Maps and strengthen trust "
@@ -595,33 +599,33 @@ msgid ""
 "Review"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:135
+#: includes/classes/Admin/Admin_Fields.php:136
 msgid ""
 "If you wish to consistently display the notification, please input the value "
 "\"-1\"."
 msgstr ""
 
 #: includes/helper-functions.php:177 includes/helper-functions.php:209
-#: includes/classes/Frontend/Manage_Wishlist.php:415
-#: includes/classes/Admin/Admin_Fields.php:357
-#: includes/classes/Admin/Wishlist_Table_List.php:194
-#: includes/classes/Admin/Wishlist_Table_List.php:202
+#: includes/classes/Frontend/Manage_Wishlist.php:636
+#: includes/classes/Admin/Admin_Fields.php:358
+#: includes/classes/Admin/Wishlist_Table_List.php:196
+#: includes/classes/Admin/Wishlist_Table_List.php:204
 msgid "Image"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:397
+#: includes/classes/Admin/Admin_Fields.php:398
 msgid "Image Hard Crop"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:382
+#: includes/classes/Admin/Admin_Fields.php:383
 msgid "Image size"
 msgstr ""
 
-#: includes/classes/Frontend/Manage_Wishlist.php:591
+#: includes/classes/Frontend/Manage_Wishlist.php:812
 msgid "In stock"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:370
+#: includes/classes/Admin/Dashboard.php:371
 msgid ""
 "Insert Headers and Footers Code allows you to insert Google Analytics, "
 "Facebook Pixel, custom CSS, custom HTML, JavaScript code to your website "
@@ -631,33 +635,33 @@ msgid ""
 "update."
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:250
+#: includes/classes/Admin/Recommended_Plugins.php:251
 msgid "Install Now"
 msgstr ""
 
-#: includes/classes/Admin/Notices.php:63
+#: includes/classes/Admin/Notices.php:64
 msgid "Install WooCommerce"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:126
+#: includes/classes/Admin/Recommended_Plugins.php:127
 msgid "Installing.."
 msgstr ""
 
-#: includes/classes/Ajax.php:71
+#: includes/classes/Ajax.php:72
 msgid "Invalid product, not added to the wishlist!"
 msgstr ""
 
-#: includes/classes/Admin/Wishlist_Table_List.php:205
+#: includes/classes/Admin/Wishlist_Table_List.php:207
 msgid ""
 "Items in Wishlist\n"
 "            "
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:267
+#: includes/classes/Admin/Dashboard.php:268
 msgid "JustTables"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:325
+#: includes/classes/Admin/Dashboard.php:326
 msgid ""
 "JustTables is an incredible WordPress plugin that lets you showcase all your "
 "WooCommerce products in a sortable and filterable table view. It allows your "
@@ -667,219 +671,219 @@ msgid ""
 "sale on your online store."
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:322
+#: includes/classes/Admin/Dashboard.php:323
 msgid "JustTables Pro"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:590
-#: includes/classes/Admin/Admin_Fields.php:604
-#: includes/classes/Admin/Admin_Fields.php:618
+#: includes/classes/Admin/Admin_Fields.php:591
+#: includes/classes/Admin/Admin_Fields.php:605
+#: includes/classes/Admin/Admin_Fields.php:619
 msgid "Left"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:90
+#: includes/classes/Admin/Admin_Fields.php:91
 msgid "Limit Wishlist Use"
 msgstr ""
 
 #: includes/templates/wishsuite-social-share.php:26
 #: includes/templates/wishsuite-social-share.php:61
-#: includes/classes/Admin/Admin_Fields.php:437
-#: includes/classes/Admin/Admin_Fields.php:449
+#: includes/classes/Admin/Admin_Fields.php:438
+#: includes/classes/Admin/Admin_Fields.php:450
 msgid "Linkedin"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:598
+#: includes/classes/Admin/Admin_Fields.php:599
 msgid "Margin"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:294
+#: includes/classes/Admin/Recommended_Plugins.php:295
 msgid "More Details"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:273
+#: includes/classes/Admin/Dashboard.php:274
 msgid "Multi Currency"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:331
+#: includes/classes/Admin/Dashboard.php:332
 msgid "Multi Currency Pro for WooCommerce"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:334
+#: includes/classes/Admin/Dashboard.php:335
 msgid ""
 "Multi-Currency Pro for WooCommerce is a prominent currency switcher plugin "
 "for WooCommerce. This plugin allows your website or online store visitors to "
 "switch to their preferred currency or their country’s currency."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:479
-#: includes/classes/Admin/Admin_Fields.php:502
+#: includes/classes/Admin/Admin_Fields.php:480
+#: includes/classes/Admin/Admin_Fields.php:503
 msgid "None"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:702
+#: includes/classes/Admin/Admin_Fields.php:703
 msgid "Notification custom style"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:532
+#: includes/classes/Admin/Admin_Fields.php:533
 msgid "Notification style"
 msgstr ""
 
 #: includes/templates/wishsuite-social-share.php:43
-#: includes/classes/Admin/Admin_Fields.php:441
+#: includes/classes/Admin/Admin_Fields.php:442
 msgid "Odnoklassniki"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:431
+#: includes/classes/Admin/Dashboard.php:432
 msgid "Others"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:584
+#: includes/classes/Admin/Admin_Fields.php:585
 msgid "Padding"
 msgstr ""
 
-#: includes/classes/Installer.php:75
+#: includes/classes/Installer.php:111
 msgctxt "page_slug"
 msgid "wishsuite"
 msgstr ""
 
 #: includes/templates/wishsuite-social-share.php:22
 #: includes/templates/wishsuite-social-share.php:60
-#: includes/classes/Admin/Admin_Fields.php:436
-#: includes/classes/Admin/Admin_Fields.php:448
+#: includes/classes/Admin/Admin_Fields.php:437
+#: includes/classes/Admin/Admin_Fields.php:449
 msgid "Pinterest"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:101
+#: includes/classes/Admin/Admin_Fields.php:102
 msgid "Please login"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:397
+#: includes/classes/Admin/Recommended_Plugins.php:398
 msgid "Plugin Not Found"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:417
+#: includes/classes/Admin/Recommended_Plugins.php:418
 msgid "Plugin Successfully Activated"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:125
+#: includes/classes/Admin/Recommended_Plugins.php:126
 msgid "Preview"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:461
+#: includes/classes/Admin/Dashboard.php:462
 msgid "Preview Link Generator"
 msgstr ""
 
 #: includes/helper-functions.php:179 includes/helper-functions.php:211
-#: includes/classes/Frontend/Manage_Wishlist.php:417
-#: includes/classes/Admin/Admin_Fields.php:359
-#: includes/classes/Admin/Wishlist_Table_List.php:196
-#: includes/classes/Admin/Wishlist_Table_List.php:204
+#: includes/classes/Frontend/Manage_Wishlist.php:638
+#: includes/classes/Admin/Admin_Fields.php:360
+#: includes/classes/Admin/Wishlist_Table_List.php:198
+#: includes/classes/Admin/Wishlist_Table_List.php:206
 msgid "Price"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:300
 #: includes/classes/Admin/Admin_Fields.php:301
+#: includes/classes/Admin/Admin_Fields.php:302
 msgid "Product Added"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:297
+#: includes/classes/Admin/Admin_Fields.php:298
 msgid "Product added text"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:309
 #: includes/classes/Admin/Admin_Fields.php:310
+#: includes/classes/Admin/Admin_Fields.php:311
 msgid "Product already added"
 msgstr ""
 
-#: includes/classes/Ajax.php:59
+#: includes/classes/Ajax.php:60
 msgid "Product do not add!"
 msgstr ""
 
-#: includes/classes/Ajax.php:88
+#: includes/classes/Ajax.php:89
 msgid "Product do not delete!"
 msgstr ""
 
-#: includes/classes/Admin/Wishlist_Table_List.php:195
-#: includes/classes/Admin/Wishlist_Table_List.php:203
+#: includes/classes/Admin/Wishlist_Table_List.php:197
+#: includes/classes/Admin/Wishlist_Table_List.php:205
 msgid "Product Name"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:240
+#: includes/classes/Admin/Admin_Fields.php:241
 msgid "Product page button position"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:183
+#: includes/classes/Admin/Admin_Fields.php:184
 msgid "Product remove text"
 msgstr ""
 
-#: includes/classes/Ajax.php:98
+#: includes/classes/Ajax.php:99
 msgid "Product successfully deleted!"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:304
+#: includes/classes/Admin/Dashboard.php:305
 msgid "Product Variation Swatches"
 msgstr ""
 
 #: includes/helper-functions.php:180 includes/helper-functions.php:212
-#: includes/classes/Frontend/Manage_Wishlist.php:418
-#: includes/classes/Admin/Admin_Fields.php:360
+#: includes/classes/Frontend/Manage_Wishlist.php:639
+#: includes/classes/Admin/Admin_Fields.php:361
 msgid "Quantity"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:467
+#: includes/classes/Admin/Dashboard.php:468
 msgid "QuickSwish"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:437
+#: includes/classes/Admin/Dashboard.php:438
 msgid "Really Simple Google Tag Manager"
 msgstr ""
 
-#: includes/classes/Admin/Recommended_Plugins.php:69
+#: includes/classes/Admin/Recommended_Plugins.php:70
 msgid "Recommendations"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:188
+#: includes/classes/Admin/Dashboard.php:189
 msgid "Recommended"
 msgstr ""
 
 #: includes/templates/wishsuite-social-share.php:35
-#: includes/classes/Admin/Admin_Fields.php:439
+#: includes/classes/Admin/Admin_Fields.php:440
 msgid "Reddit"
 msgstr ""
 
 #: includes/helper-functions.php:176 includes/helper-functions.php:208
-#: includes/classes/Frontend/Manage_Wishlist.php:414
-#: includes/classes/Admin/Admin_Fields.php:356
-#: includes/classes/Admin/Admin_Fields.php:491
-#: includes/classes/Admin/Admin_Fields.php:514
+#: includes/classes/Frontend/Manage_Wishlist.php:635
+#: includes/classes/Admin/Admin_Fields.php:357
+#: includes/classes/Admin/Admin_Fields.php:492
+#: includes/classes/Admin/Admin_Fields.php:515
 msgid "Remove"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:344
+#: includes/classes/Admin/Admin_Fields.php:345
 msgid "Remove from the \"Wishlist\" after adding to the cart."
 msgstr ""
 
-#: includes/classes/Frontend/Shortcode.php:73
-#: includes/classes/Admin/Admin_Fields.php:186
+#: includes/classes/Frontend/Shortcode.php:74
 #: includes/classes/Admin/Admin_Fields.php:187
+#: includes/classes/Admin/Admin_Fields.php:188
 msgid "Remove from wishlist"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:131
+#: includes/classes/Admin/Admin_Fields.php:132
 msgid "Remove Notification automatically after (seconds)"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:175
+#: includes/classes/Admin/Admin_Fields.php:176
 msgid "Remove product from wishlist on second click"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:178
+#: includes/classes/Admin/Admin_Fields.php:179
 msgid "Remove the product from the wishlist if it has already been added."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:588
-#: includes/classes/Admin/Admin_Fields.php:602
-#: includes/classes/Admin/Admin_Fields.php:616
+#: includes/classes/Admin/Admin_Fields.php:589
+#: includes/classes/Admin/Admin_Fields.php:603
+#: includes/classes/Admin/Admin_Fields.php:617
 msgid "Right"
 msgstr ""
 
@@ -887,116 +891,116 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:151
+#: includes/classes/Admin/Admin_Fields.php:152
 msgid ""
 "Set days for automatic deletion of wishlist items from guest or unregistered "
 "users."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:681
+#: includes/classes/Admin/Admin_Fields.php:682
 msgid "Set the add to cart button background color of the wishlist table."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:674
+#: includes/classes/Admin/Admin_Fields.php:675
 msgid "Set the add to cart button color of the wishlist table."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:695
+#: includes/classes/Admin/Admin_Fields.php:696
 msgid ""
 "Set the add to cart button hover background color of the wishlist table."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:688
+#: includes/classes/Admin/Admin_Fields.php:689
 msgid "Set the add to cart button hover color of the wishlist table."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:569
+#: includes/classes/Admin/Admin_Fields.php:570
 msgid "Set the background color of the button."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:711
+#: includes/classes/Admin/Admin_Fields.php:712
 msgid "Set the background color of the notification."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:718
+#: includes/classes/Admin/Admin_Fields.php:719
 msgid "Set the border color of the notification."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:658
+#: includes/classes/Admin/Admin_Fields.php:659
 msgid "Set the border color of the wishlist table."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:732
+#: includes/classes/Admin/Admin_Fields.php:733
 msgid "Set the close button color of the notification."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:739
+#: includes/classes/Admin/Admin_Fields.php:740
 msgid "Set the close button hover color of the notification."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:553
+#: includes/classes/Admin/Admin_Fields.php:554
 msgid "Set the color of the button."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:725
+#: includes/classes/Admin/Admin_Fields.php:726
 msgid "Set the content color of the notification."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:643
+#: includes/classes/Admin/Admin_Fields.php:644
 msgid "Set the heading background color of the wishlist table."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:650
+#: includes/classes/Admin/Admin_Fields.php:651
 msgid "Set the heading border color of the wishlist table."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:635
+#: includes/classes/Admin/Admin_Fields.php:636
 msgid "Set the heading color of the wishlist table."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:577
+#: includes/classes/Admin/Admin_Fields.php:578
 msgid "Set the hover background color of the button."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:561
+#: includes/classes/Admin/Admin_Fields.php:562
 msgid "Set the hover color of the button."
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:78
-#: includes/classes/Admin/Dashboard.php:514
+#: includes/classes/Admin/Dashboard.php:79
 #: includes/classes/Admin/Dashboard.php:515
+#: includes/classes/Admin/Dashboard.php:516
 msgid "Settings"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:424
+#: includes/classes/Admin/Admin_Fields.php:425
 msgid "Share"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:423
+#: includes/classes/Admin/Admin_Fields.php:424
 msgid "Share:"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:193
+#: includes/classes/Admin/Admin_Fields.php:194
 msgid "Shop page button position"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:161
+#: includes/classes/Admin/Admin_Fields.php:162
 msgid "Show button in product list"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:168
+#: includes/classes/Admin/Admin_Fields.php:169
 msgid "Show button in single product page"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:351
+#: includes/classes/Admin/Admin_Fields.php:352
 msgid "Show fields in table"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:107
+#: includes/classes/Admin/Admin_Fields.php:108
 msgid "Show successful notification"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:491
+#: includes/classes/Admin/Dashboard.php:492
 msgid "Sirve – Simple Directory Listing"
 msgstr ""
 
@@ -1004,138 +1008,138 @@ msgstr ""
 msgid "Sku"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:404
+#: includes/classes/Admin/Admin_Fields.php:405
 msgid "Social share button"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:420
+#: includes/classes/Admin/Admin_Fields.php:421
 msgid "Social share button title"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:216
+#: includes/classes/Admin/Admin_Fields.php:217
 msgid ""
 "Some themes remove the above positions. In that case, custom position is "
 "useful. Here you can place the custom/default hook name & priority to inject "
 "& adjust the wishlist button for the product loop."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:264
+#: includes/classes/Admin/Admin_Fields.php:265
 msgid ""
 "Some themes remove the above positions. In that case, custom position is "
 "useful. Here you can place the custom/default hook name & priority to inject "
 "& adjust the wishlist button for the single product page."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:63
+#: includes/classes/Admin/Admin_Fields.php:64
 msgid "Style Settings"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:764
+#: includes/classes/Admin/Admin_Fields.php:765
 msgid "Successfully Settings Saved."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:626
+#: includes/classes/Admin/Admin_Fields.php:627
 msgid "Table custom style"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:367
+#: includes/classes/Admin/Admin_Fields.php:368
 msgid "Table heading text"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:58
+#: includes/classes/Admin/Admin_Fields.php:59
 msgid "Table Settings"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:520
+#: includes/classes/Admin/Admin_Fields.php:521
 msgid "Table style"
 msgstr ""
 
 #: includes/templates/wishsuite-social-share.php:39
 #: includes/templates/wishsuite-social-share.php:62
-#: includes/classes/Admin/Admin_Fields.php:440
-#: includes/classes/Admin/Admin_Fields.php:450
+#: includes/classes/Admin/Admin_Fields.php:441
+#: includes/classes/Admin/Admin_Fields.php:451
 msgid "Telegram"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:376
+#: includes/classes/Admin/Admin_Fields.php:377
 msgid ""
 "Text will be displayed if the user doesn't add any product to  the wishlist."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:467
+#: includes/classes/Admin/Admin_Fields.php:468
 msgid "Theme style"
 msgstr ""
 
 #: includes/helper-functions.php:178 includes/helper-functions.php:210
-#: includes/classes/Frontend/Manage_Wishlist.php:416
-#: includes/classes/Admin/Admin_Fields.php:358
+#: includes/classes/Frontend/Manage_Wishlist.php:637
+#: includes/classes/Admin/Admin_Fields.php:359
 msgid "Title"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:339
+#: includes/classes/Admin/Admin_Fields.php:340
 msgid ""
 "Toggle the option to enable or disable <b>\"Quick Add to Cart\"</b> "
 "functionality in the wishlist table."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:587
-#: includes/classes/Admin/Admin_Fields.php:601
-#: includes/classes/Admin/Admin_Fields.php:615
+#: includes/classes/Admin/Admin_Fields.php:588
+#: includes/classes/Admin/Admin_Fields.php:602
+#: includes/classes/Admin/Admin_Fields.php:616
 msgid "Top"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:200
+#: includes/classes/Admin/Admin_Fields.php:201
 msgid "Top On Image"
 msgstr ""
 
 #: includes/templates/wishsuite-social-share.php:18
 #: includes/templates/wishsuite-social-share.php:59
-#: includes/classes/Admin/Admin_Fields.php:435
-#: includes/classes/Admin/Admin_Fields.php:447
+#: includes/classes/Admin/Admin_Fields.php:436
+#: includes/classes/Admin/Admin_Fields.php:448
 msgid "Twitter"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:591
-#: includes/classes/Admin/Admin_Fields.php:605
-#: includes/classes/Admin/Admin_Fields.php:619
+#: includes/classes/Admin/Admin_Fields.php:592
+#: includes/classes/Admin/Admin_Fields.php:606
+#: includes/classes/Admin/Admin_Fields.php:620
 msgid "Unit"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:490
-#: includes/classes/Admin/Admin_Fields.php:513
+#: includes/classes/Admin/Admin_Fields.php:491
+#: includes/classes/Admin/Admin_Fields.php:514
 msgid "Upload"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:201
-#: includes/classes/Admin/Admin_Fields.php:249
+#: includes/classes/Admin/Admin_Fields.php:202
+#: includes/classes/Admin/Admin_Fields.php:250
 msgid "Use Shortcode"
 msgstr ""
 
-#: includes/classes/Admin/Wishlist_Table_List.php:90
+#: includes/classes/Admin/Wishlist_Table_List.php:92
 msgid "View by User"
 msgstr ""
 
 #: includes/templates/wishsuite-social-share.php:51
-#: includes/classes/Admin/Admin_Fields.php:443
+#: includes/classes/Admin/Admin_Fields.php:444
 msgid "VK"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:403
+#: includes/classes/Admin/Dashboard.php:404
 msgid "Was This Helpful?"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:406
+#: includes/classes/Admin/Dashboard.php:407
 msgid ""
 "Was this helpful? is a WordPress plugin that allows you to take visitors' "
 "feedback on your post/pages or any article. A visitor can share his feedback "
 "by like/dislike/yes/no"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:255
+#: includes/classes/Admin/Dashboard.php:256
 msgid "WC Builder"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:455
+#: includes/classes/Admin/Dashboard.php:456
 msgid "WC Sales Notification"
 msgstr ""
 
@@ -1144,7 +1148,7 @@ msgid "Weight"
 msgstr ""
 
 #: includes/templates/wishsuite-social-share.php:47
-#: includes/classes/Admin/Admin_Fields.php:442
+#: includes/classes/Admin/Admin_Fields.php:443
 msgid "WhatsApp"
 msgstr ""
 
@@ -1152,11 +1156,11 @@ msgstr ""
 msgid "Whislist&body=My whislist:"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:261
+#: includes/classes/Admin/Dashboard.php:262
 msgid "Whols"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:316
+#: includes/classes/Admin/Dashboard.php:317
 msgid ""
 "Whols is an outstanding WordPress plugin for WooCommerce that allows store "
 "owners to set wholesale prices for the products of their online stores. This "
@@ -1167,38 +1171,39 @@ msgid ""
 "manually or automatically."
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:313
+#: includes/classes/Admin/Dashboard.php:314
 msgid "Whols Pro"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:386
+#: includes/classes/Admin/Admin_Fields.php:387
 msgid "Width"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:92
 #: includes/classes/Admin/Dashboard.php:93
-#: includes/classes/Admin/Admin_Fields.php:291
+#: includes/classes/Admin/Dashboard.php:94
 #: includes/classes/Admin/Admin_Fields.php:292
+#: includes/classes/Admin/Admin_Fields.php:293
 msgid "Wishlist"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:520
 #: includes/classes/Admin/Dashboard.php:521
-#: includes/classes/Admin/Admin_Fields.php:68
+#: includes/classes/Admin/Dashboard.php:522
+#: includes/classes/Admin/Admin_Fields.php:69
+#: includes/classes/Admin/Settings_Api.php:172
 msgid "Wishlist Items"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:319
+#: includes/classes/Admin/Admin_Fields.php:320
 msgid "Wishlist page"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:328
+#: includes/classes/Admin/Admin_Fields.php:329
 msgid "Wishlist products per page"
 msgstr ""
 
-#: includes/classes/Installer.php:77 includes/classes/Admin/Dashboard.php:111
-#: includes/classes/Admin/Dashboard.php:112
-#: includes/classes/Admin/Dashboard.php:552
+#: includes/classes/Installer.php:113 includes/classes/Admin/Dashboard.php:112
+#: includes/classes/Admin/Dashboard.php:113
+#: includes/classes/Admin/Dashboard.php:553
 msgid "WishSuite"
 msgstr ""
 
@@ -1206,7 +1211,7 @@ msgstr ""
 msgid "WishSuite - Wishlist for WooCommerce"
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:753
+#: includes/classes/Admin/Admin_Fields.php:754
 msgid "WishSuite Settings"
 msgstr ""
 
@@ -1214,80 +1219,80 @@ msgstr ""
 msgid "WooCommerce Product wishlist plugin"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:195
+#: includes/classes/Admin/Dashboard.php:196
 msgid "WooLentor"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:289
+#: includes/classes/Admin/Dashboard.php:290
 msgid ""
 "WooLentor is one of the most popular WooCommerce Elementor Addons on "
 "WordPress.org. It has been downloaded more than 672,148 times and 60,000 "
 "stores are using WooLentor plugin. Why not you?"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:286
+#: includes/classes/Admin/Dashboard.php:287
 msgid "WooLentor Pro"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:379
+#: includes/classes/Admin/Dashboard.php:380
 msgid "WordPress Mega Menu Builder for Elementor"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:249
+#: includes/classes/Admin/Dashboard.php:250
 msgid "WP Plugin Manager"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:358
+#: includes/classes/Admin/Dashboard.php:359
 msgid "WP Plugin Manager Pro"
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:361
+#: includes/classes/Admin/Dashboard.php:362
 msgid ""
 "WP Plugin Manager Pro is a specialized WordPress Plugin that helps you to "
 "deactivate unnecessary WordPress Plugins page wise and boosts the speed of "
 "your WordPress site to improve the overall site performance."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:368
+#: includes/classes/Admin/Admin_Fields.php:369
 msgid "You can change table heading text from here."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:331
+#: includes/classes/Admin/Admin_Fields.php:332
 msgid ""
 "You can choose the number of wishlist products to display per page. The "
 "default value is 20 products."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:194
+#: includes/classes/Admin/Admin_Fields.php:195
 msgid "You can manage wishlist button position in product list page."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:241
+#: includes/classes/Admin/Admin_Fields.php:242
 msgid "You can manage wishlist button position in single product page."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:431
+#: includes/classes/Admin/Admin_Fields.php:432
 msgid "You can manage your social share buttons."
 msgstr ""
 
-#: includes/classes/Admin/Admin_Fields.php:118
-#: includes/classes/Admin/Admin_Fields.php:126
+#: includes/classes/Admin/Admin_Fields.php:119
+#: includes/classes/Admin/Admin_Fields.php:127
 msgid ""
 "You can use the placeholder {product_name} to get the current product name."
 msgstr ""
 
-#: includes/classes/Admin/Dashboard.php:280
+#: includes/classes/Admin/Dashboard.php:281
 msgid "You May Also Like"
 msgstr ""
 
-#: includes/classes/Manage_Data.php:34
+#: includes/classes/Manage_Data.php:57
 msgid "You must provide a product ID."
 msgstr ""
 
-#: includes/classes/Assets.php:98 includes/classes/Admin/Admin_Fields.php:117
+#: includes/classes/Assets.php:99 includes/classes/Admin/Admin_Fields.php:118
 msgid "{product_name} added to wishlist."
 msgstr ""
 
-#: includes/classes/Assets.php:99 includes/classes/Admin/Admin_Fields.php:125
+#: includes/classes/Assets.php:100 includes/classes/Admin/Admin_Fields.php:126
 msgid "{product_name} removed from wishlist."
 msgstr ""

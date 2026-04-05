@@ -1,5 +1,6 @@
 <?php
 namespace WishSuite\Frontend;
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Manage Wishlist class
  */
@@ -152,7 +153,7 @@ class Manage_Wishlist {
                 }
                 
                 $temp_id_key = 'wishsuite_temp_user_id';
-                $temp_user_id = sanitize_text_field($_COOKIE[$temp_id_key]);
+                $temp_user_id = isset( $_COOKIE[$temp_id_key] ) ? sanitize_text_field( $_COOKIE[$temp_id_key] ) : '';
                 if($temp_user_id) {
                     \WishSuite\Manage_Data::instance()->delete( $temp_user_id, $id );
                 }
@@ -688,12 +689,12 @@ class Manage_Wishlist {
 
             case 'image':
                 ?>
-                    <a href="<?php echo get_permalink( $product['id'] ); ?>"> <?php echo $product['image']; ?> </a>
+                    <a href="<?php echo esc_url( get_permalink( $product['id'] ) ); ?>"> <?php echo wp_kses_post( $product['image'] ); ?> </a>
                 <?php
                 break;
 
             case 'title':
-                echo '<a href="'.get_permalink( $product['id'] ).'">'.$product[ $field_id ].'</a>';
+                echo '<a href="' . esc_url( get_permalink( $product['id'] ) ) . '">' . wp_kses_post( $product[ $field_id ] ) . '</a>';
                 break;
 
             case 'price':
@@ -792,7 +793,7 @@ class Manage_Wishlist {
                 <div class="wishsuite-quick-cart-form"></div>
             </div>
         <?php endif; ?>
-            <a href="<?php echo $product->add_to_cart_url(); ?>" data-quantity="<?php echo esc_attr( $quentity ); ?>" class="<?php echo $btn_class; ?>" data-product_id="<?php echo $product->get_id(); ?>" rel="nofollow"><?php echo esc_html( $cart_btn );?></a>
+            <a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>" data-quantity="<?php echo esc_attr( $quentity ); ?>" class="<?php echo esc_attr( $btn_class ); ?>" data-product_id="<?php echo esc_attr( $product->get_id() ); ?>" rel="nofollow"><?php echo esc_html( $cart_btn );?></a>
         <?php
         return ob_get_clean();
 

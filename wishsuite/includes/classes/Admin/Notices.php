@@ -1,5 +1,6 @@
 <?php
 namespace WishSuite\Admin;
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Notices handlers class
  */

@@ -1,5 +1,6 @@
 <?php
 namespace WishSuite\Frontend;
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Shortcode handler class
  */

@@ -1,5 +1,6 @@
 <?php
 namespace WishSuite;
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Ajax handlers class
  */
@@ -160,7 +161,7 @@ class Ajax {
         $passed_validation  = apply_filters( 'woocommerce_add_to_cart_validation', true, $product_id, $quantity, $variation_id, $variations );
         $product_status     = get_post_status( $product_id );
 
-        if ( $passed_validation && \WC()->cart->add_to_cart( $product_id, $quantity, $variation_id, $variations ) && 'publish' === $product_status ) {
+        if ( $passed_validation && 'publish' === $product_status && \WC()->cart->add_to_cart( $product_id, $quantity, $variation_id, $variations ) ) {
             do_action( 'woocommerce_ajax_added_to_cart', $product_id );
             if ( 'yes' === get_option('woocommerce_cart_redirect_after_add') ) {
                 wc_add_to_cart_message( array( $product_id => $quantity ), true );
@@ -171,9 +172,8 @@ class Ajax {
                 'error' => true,
                 'product_url' => apply_filters('woocommerce_cart_redirect_after_error', get_permalink( $product_id ), $product_id ),
             );
-            echo wp_send_json( $data );
+            wp_send_json( $data );
         }
-        wp_send_json_success();
         
     }
 

@@ -5,7 +5,7 @@
  * Plugin URI: https://hasthemes.com/plugins/
  * Author: HasThemes
  * Author URI: https://hasthemes.com/
- * Version: 1.5.3
+ * Version: 1.5.4
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wishsuite
@@ -25,7 +25,7 @@ final class WishSuite_Base{
      *
      * @var string
      */
-    const version = '1.5.3';
+    const version = '1.5.4';
 
     /**
      * [$_instance]
@@ -61,6 +61,9 @@ final class WishSuite_Base{
         add_action( 'before_woocommerce_init', function() {
             if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
                 \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', WISHSUITE_FILE, true );
+                \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', WISHSUITE_FILE, true );
+                \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'product_block_editor', WISHSUITE_FILE, true );
+                \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'product_instance_caching', WISHSUITE_FILE, true );
             }
         } );
     }

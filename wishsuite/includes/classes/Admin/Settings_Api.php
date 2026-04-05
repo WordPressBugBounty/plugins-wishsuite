@@ -1,5 +1,6 @@
 <?php
 namespace WishSuite\Admin;
+if ( ! defined( 'ABSPATH' ) ) exit;
 use WishSuite\Admin\Wishlist_Table_List;
 /**
  * Settings Api class
@@ -100,7 +101,7 @@ class Settings_Api {
 
             if ( isset($section['desc']) && !empty($section['desc']) ) {
                 $section['desc'] = '<div class="inside">' . $section['desc'] . '</div>';
-                $callback = function() use ( $section ) { echo str_replace( '"', '\"', $section['desc'] ); };
+                $callback = function() use ( $section ) { echo wp_kses_post( $section['desc'] ); };
             } else if ( isset( $section['callback'] ) ) {
                 $callback = $section['callback'];
             } else {
@@ -158,6 +159,7 @@ class Settings_Api {
         if(isset($_POST['user_id'])) {
             $new_url = add_query_arg( 'user_id', sanitize_text_field($_POST['user_id']), admin_url('admin.php?page=wishsuite') );
             wp_redirect( $new_url );
+            exit;
         }
 
         $table = new Wishlist_Table_List();
@@ -167,7 +169,7 @@ class Settings_Api {
         ?>
         <div class="wrap">
             <?php
-                $title = "Wishlist Items";
+                $title = __( 'Wishlist Items', 'wishsuite' );
                 $user_id = !empty($_GET['user_id']) ? sanitize_text_field($_GET['user_id']) : null;
                 if($user_id) {
                     $user = get_userdata($user_id);
@@ -178,7 +180,7 @@ class Settings_Api {
                     }
                 }
             ?>
-            <h3 class="wishsuite-table-title"><?php esc_html_e( $title,"wishsuite"); ?></h3>
+            <h3 class="wishsuite-table-title"><?php echo esc_html( $title ); ?></h3>
             <?php $table->display(); ?>
         </div>
         <?php
@@ -207,7 +209,7 @@ class Settings_Api {
     public function callback_title( $args ) {
         $headding    = isset( $args['headding'] ) ? $args['headding'] : '';
         $size        = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-        $html        = sprintf( '<h2 class="element_section_title %1$s-title">%2$s</h2>', $size, $headding );
+        $html        = sprintf( '<h2 class="element_section_title %1$s-title">%2$s</h2>', esc_attr( $size ), esc_html( $headding ) );
         echo $html;
     }
 
@@ -333,7 +335,7 @@ class Settings_Api {
 
         $field_options = is_array( $value ) ? array_merge( $value, $args['options'] ) : $args['options'];
 
-        $html  = '<fieldset><input type="checkbox" class="htoption-shortable-checkall">'.esc_html__( 'Check All', 'htoptions' ).'<ul class="htoption_shortable">';
+        $html  = '<fieldset><input type="checkbox" class="htoption-shortable-checkall">'.esc_html__( 'Check All', 'wishsuite' ).'<ul class="htoption_shortable">';
         $html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="" />', $args['section'], $args['id'] );
 
         foreach ( $field_options as $key => $label ) {

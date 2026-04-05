@@ -1,5 +1,6 @@
 <?php
 namespace WishSuite;
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Manage_Data handlers class
  */
@@ -85,7 +86,7 @@ class Manage_Data {
                 return new \WP_Error( 'failed-to-insert', __( 'Failed to insert data', 'wishsuite' ) );
             }
 
-            $this->purge_cache();
+            $this->purge_cache( $data['user_id'], $data['product_id'] );
 
             return $wpdb->insert_id;
         }
@@ -316,7 +317,7 @@ class Manage_Data {
             [ '%d', '%d' ]
         );
 
-        $this->purge_cache( $user_id );
+        $this->purge_cache( $user_id, $product_id );
 
         return $updated;
 
@@ -330,12 +331,12 @@ class Manage_Data {
     public function item_count( $user_id ) {
         global $wpdb;
 
-        $count = wp_cache_get( 'count', 'wishsuite' );
+        $count = wp_cache_get( 'count-' . $user_id, 'wishsuite' );
 
         if ( false === $count ) {
             $count = (int) $wpdb->get_var( $wpdb->prepare( "SELECT count(id) FROM {$wpdb->prefix}wishsuite_list WHERE user_id = %d", $user_id ) );
 
-            wp_cache_set( 'count', $count, 'wishsuite' );
+            wp_cache_set( 'count-' . $user_id, $count, 'wishsuite' );
         }
 
         return $count;
@@ -349,13 +350,13 @@ class Manage_Data {
     public function read_single_item( $user_id, $product_id ) {
         global $wpdb;
 
-        $product = wp_cache_get( 'wishsuite-product-' . $user_id.$product_id, 'wishsuite' );
+        $product = wp_cache_get( 'wishsuite-product-' . $user_id . '-' . $product_id, 'wishsuite' );
 
         if ( false === $product ) {
             $product = $wpdb->get_row(
                 $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wishsuite_list WHERE user_id = %d AND product_id = %d", $user_id, $product_id )
             );
-            wp_cache_set( 'wishsuite-product-' . $user_id.$product_id, $product, 'wishsuite' );
+            wp_cache_set( 'wishsuite-product-' . $user_id . '-' . $product_id, $product, 'wishsuite' );
         }
 
         return $product;
@@ -371,7 +372,7 @@ class Manage_Data {
     public function delete( $user_id, $product_id ) {
         global $wpdb;
 
-        $this->purge_cache( $user_id );
+        $this->purge_cache( $user_id, $product_id );
 
         return $wpdb->delete(
             $wpdb->prefix . 'wishsuite_list',
@@ -389,14 +390,16 @@ class Manage_Data {
      * @param  [int] $user_id
      * @return [type] 
      */
-    public function purge_cache( $user_id = null ) {
+    public function purge_cache( $user_id = null, $product_id = null ) {
         $group = 'wishsuite';
 
         if ( $user_id ) {
-            wp_cache_delete( 'wishsuite-product-' . $user_id, $group );
+            wp_cache_delete( 'count-' . $user_id, $group );
+            if ( $product_id ) {
+                wp_cache_delete( 'wishsuite-product-' . $user_id . '-' . $product_id, $group );
+            }
         }
 
-        wp_cache_delete( 'count', $group );
         wp_cache_set( 'last_changed', microtime(), $group );
 
     }

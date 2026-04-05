@@ -47,7 +47,7 @@ function wishsuite_update_option( $section, $option_key, $new_value ){
 function wishsuite_get_post_list( $post_type = 'page' ){
     $options = array();
     $options['0'] = __('Select','wishsuite');
-    $perpage = -1;
+    $perpage = 100;
     $all_post = array( 'posts_per_page' => $perpage, 'post_type'=> $post_type );
     $post_terms = get_posts( $all_post );
     if ( ! empty( $post_terms ) && ! is_wp_error( $post_terms ) ){
@@ -129,7 +129,7 @@ function wishsuite_get_template( $tmp_name, $args = null, $echo = true ) {
     }
 
     if ( $args && is_array( $args ) ) {
-        extract( $args );
+        extract( $args, EXTR_SKIP );
     }
 
     if ( $echo !== true ) { ob_start(); }
@@ -137,7 +137,7 @@ function wishsuite_get_template( $tmp_name, $args = null, $echo = true ) {
     try {
         include $located;
     } catch (Exception $e) {
-        error_log('WishSuite template error: ' . $e->getMessage());
+        wc_get_logger()->error( 'Template error: ' . $e->getMessage(), array( 'source' => 'wishsuite' ) );
         if ($echo !== true) {
             ob_end_clean();
             return '';
