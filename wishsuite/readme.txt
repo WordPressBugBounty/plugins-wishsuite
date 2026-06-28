@@ -2,8 +2,8 @@
 Contributors: htplugins, hasthemes, tarekht, zenaulislam, aslamhasib
 Tags: woocommerce, wishlist, product wishlist, wishsuite, woocommerce wishlist
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 1.5.4
+Tested up to: 7.0
+Stable tag: 1.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -105,6 +105,11 @@ Needs assistance to use this plugin?
 Feel free to [Contact us](https://hasthemes.com/contact-us/)
 
 == Changelog ==
+
+= Version: 1.5.5 - Date: 2026-06-28 =
+* Added: Copy link button in the share section for one-click copying of the shareable wishlist URL.
+* Added: Setting to enable or disable the copy link button.
+* Fixed: Share links pointed to admin-ajax.php after removing a wishlist item via AJAX.
 
 = Version: 1.5.4 - Date: 2026-04-05 =
 * Fixed: Escaping issues across admin and frontend templates.

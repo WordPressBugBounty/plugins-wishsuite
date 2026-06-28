@@ -450,6 +450,105 @@ a.wishsuite-button.loading img {
     height: 15px;
 }
 
+.wishsuite-social-share ul li.wishsuite-copy-link-item {
+    display: inline-flex;
+}
+
+.wishsuite-social-share ul li.wishsuite-copy-link-item .wishsuite-copy-link,
+.wishsuite-copy-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    line-height: 1;
+    padding: 5px;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    background: none;
+    background-color: transparent;
+    color: #3a3a3a;
+    cursor: pointer;
+    font: inherit;
+    text-transform: none;
+    min-height: 0;
+}
+
+.wishsuite-copy-link:hover,
+.wishsuite-copy-link:focus,
+.wishsuite-copy-link:active {
+    background: none;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+    outline: none;
+    color: var(--wishsuite-copy-hover, #1e73be);
+}
+
+.wishsuite-copy-link .wishsuite-social-icon {
+    display: inline-flex;
+}
+
+.wishsuite-copy-link .wishsuite-social-icon svg {
+    fill: currentColor;
+    width: 15px;
+    height: 15px;
+}
+
+.wishsuite-copy-link .wishsuite-social-icon svg.wishsuite-link-icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.75;
+}
+
+.wishsuite-copy-link {
+    position: relative;
+}
+
+.wishsuite-copy-link::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: #333;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.wishsuite-copy-link::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: nowrap;
+    color: #fff;
+    background: #333;
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.wishsuite-copy-link:hover::before,
+.wishsuite-copy-link:focus::before,
+.wishsuite-copy-link:hover::after,
+.wishsuite-copy-link:focus::after {
+    opacity: 1;
+}
+
+.wishsuite-copy-link.wishsuite-copied,
+.wishsuite-copy-link.wishsuite-copied:hover {
+    color: #2e7d32;
+}
+
 /* Wishlist Counter */
 .wishsuite-counter-area:not(.wishsuite-has-text) {
     display: inline-block;

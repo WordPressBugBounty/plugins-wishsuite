@@ -453,6 +453,15 @@ class Admin_Fields {
                     'class' => 'depend_social_share_enable'
                 ),
 
+                array(
+                    'name'    => 'enable_copy_link',
+                    'label'   => esc_html__( 'Copy link button', 'wishsuite' ),
+                    'type'    => 'checkbox',
+                    'default' => 'off',
+                    'desc'    => esc_html__( 'Add a one-click copy link button to the share section so visitors can copy and share the wishlist URL.', 'wishsuite' ),
+                    'class'   => 'depend_social_share_enable',
+                ),
+
             ),
 
             'wishsuite_style_settings_tabs' => array(

@@ -437,5 +437,39 @@
         }
     });
 
+    // Copy share link to clipboard
+    $body.on('click', '.wishsuite-copy-link', function(e) {
+        e.preventDefault();
+        const $btn = $(this);
+        const link = $btn.data('clipboard');
+        if (!link) { return; }
+
+        const original = $btn.data('tooltip') || '';
+        const copied = $btn.data('copied') || 'Copied';
+
+        const showCopied = function() {
+            $btn.addClass('wishsuite-copied').attr('data-tooltip', copied).attr('aria-label', copied);
+            setTimeout(function() {
+                $btn.removeClass('wishsuite-copied').attr('data-tooltip', original).attr('aria-label', original);
+            }, 2000);
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(link).then(showCopied).catch(function() {
+                fallbackCopy(link, showCopied);
+            });
+        } else {
+            fallbackCopy(link, showCopied);
+        }
+    });
+
+    // Fallback copy for non-secure (HTTP) contexts
+    function fallbackCopy(text, onDone) {
+        const $temp = $('<textarea>');
+        $temp.css({ position: 'fixed', top: '-9999px', opacity: 0 }).val(text).appendTo($body);
+        $temp[0].select();
+        try { document.execCommand('copy'); onDone(); } catch (err) {}
+        $temp.remove();
+    }
 
 })(jQuery);
