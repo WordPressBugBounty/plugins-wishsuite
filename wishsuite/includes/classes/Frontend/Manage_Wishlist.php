@@ -53,6 +53,10 @@ class Manage_Wishlist {
     private function __construct() {
         add_action( 'init', [ $this, 'button_manager' ] );
 
+        // Register wishlist thumbnail size so <img> gets explicit width/height
+        // (fixes PageSpeed "Image elements do not have explicit width and height").
+        add_action( 'after_setup_theme', [ $this, 'register_image_sizes' ] );
+
         // Block support - only affects pages using blocks
         add_filter( 'render_block', [ $this, 'handle_block_rendering' ], 10, 2 );
 
@@ -189,6 +193,18 @@ class Manage_Wishlist {
      * [button_manager] Button Manager
      * @return [void]
      */
+    /**
+     * Register custom image size used for wishlist table thumbnails.
+     * Ensures wp_get_attachment_image() emits explicit width/height attributes.
+     */
+    public function register_image_sizes(){
+        $size   = wishsuite_get_option( 'image_size', 'wishsuite_table_settings_tabs', array( 'width' => 80, 'height' => 80 ) );
+        $width  = ( is_array( $size ) && ! empty( $size['width'] ) )  ? absint( $size['width'] )  : 80;
+        $height = ( is_array( $size ) && ! empty( $size['height'] ) ) ? absint( $size['height'] ) : 80;
+        $crop   = ( 'on' === wishsuite_get_option( 'hard_crop', 'wishsuite_table_settings_tabs', 'on' ) );
+        add_image_size( 'wishsuite-image', $width, $height, $crop );
+    }
+
     public function button_manager(){
 
         $shop_page_btn_position     = wishsuite_get_option( 'shop_btn_position', 'wishsuite_settings_tabs', 'after_cart_btn' );
@@ -688,8 +704,14 @@ class Manage_Wishlist {
                 break;
 
             case 'image':
+                $icon_over = ( 'on' === wishsuite_get_option( 'icon_over_image', 'wishsuite_table_settings_tabs', 'off' ) );
                 ?>
-                    <a href="<?php echo esc_url( get_permalink( $product['id'] ) ); ?>"> <?php echo wp_kses_post( $product['image'] ); ?> </a>
+                    <div class="wishsuite-image-wrap<?php echo $icon_over ? ' wishsuite-icon-over-image' : ''; ?>">
+                        <a href="<?php echo esc_url( get_permalink( $product['id'] ) ); ?>"> <?php echo wp_kses_post( $product['image'] ); ?> </a>
+                        <?php if ( $icon_over ) : ?>
+                            <a href="#" class="wishsuite-remove wishsuite-remove-overlay" data-product-title="<?php echo esc_attr( $product['title'] ); ?>" data-product_id="<?php echo esc_attr( $product['id'] ); ?>">&nbsp;</a>
+                        <?php endif; ?>
+                    </div>
                 <?php
                 break;
 

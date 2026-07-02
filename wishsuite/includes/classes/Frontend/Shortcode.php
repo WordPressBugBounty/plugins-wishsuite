@@ -63,8 +63,11 @@ class Shortcode {
 
         // Fetch option data
         $button_text        = wishsuite_get_option( 'button_text','wishsuite_settings_tabs', 'Wishlist' );
+        $button_text        = empty( $button_text ) ? __( 'Wishlist', 'wishsuite' ) : $button_text;
         $button_added_text  = wishsuite_get_option( 'added_button_text','wishsuite_settings_tabs', 'Product Added' );
+        $button_added_text  = empty( $button_added_text ) ? __( 'Product Added', 'wishsuite' ) : $button_added_text;
         $button_exist_text  = wishsuite_get_option( 'exist_button_text','wishsuite_settings_tabs', 'Product already added' );
+        $button_exist_text  = empty( $button_exist_text ) ? __( 'Product already added', 'wishsuite' ) : $button_exist_text;
         $shop_page_btn_position     = wishsuite_get_option( 'shop_btn_position', 'wishsuite_settings_tabs', 'after_cart_btn' );
         $product_page_btn_position  = wishsuite_get_option( 'product_btn_position', 'wishsuite_settings_tabs', 'after_cart_btn' );
         $button_style               = wishsuite_get_option( 'button_style', 'wishsuite_style_settings_tabs', 'default' );
@@ -79,6 +82,7 @@ class Shortcode {
             $has_product   = false;
         }else{
             $button_text = wishsuite_get_option( 'button_text','wishsuite_settings_tabs', 'Wishlist' );
+            $button_text = empty( $button_text ) ? __( 'Wishlist', 'wishsuite' ) : $button_text;
             $page_url = wishsuite_get_page_url();
         }
 
@@ -251,7 +255,13 @@ class Shortcode {
 
         $default_icon   = wishsuite_icon_list('default');
         $default_loader = '<span class="wishsuite-loader">'.wishsuite_icon_list('loading').'</span>';
-        
+
+        // Solid-heart (added state) modifier for the default icon.
+        // Heart colors are applied via inline_style() CSS (gated to custom button style).
+        $solid_added = ( 'on' === wishsuite_get_option( 'use_solid_heart', 'wishsuite_style_settings_tabs', 'off' ) );
+        $svg_class   = 'wishsuite-default-icon'.( $solid_added ? ' wishsuite-solid-added' : '' );
+        $default_icon = str_replace( '<svg ', '<svg class="'.esc_attr( $svg_class ).'" ', $default_icon );
+
         $button_icon = '';
         $button_text = ( $type === 'added' ) ? wishsuite_get_option( 'added_button_text','wishsuite_settings_tabs', 'Wishlist' ) : wishsuite_get_option( 'button_text','wishsuite_settings_tabs', 'Wishlist' );
         $button_icon_type  = wishsuite_get_option( $type.'button_icon_type', 'wishsuite_style_settings_tabs', 'default' );
@@ -265,7 +275,21 @@ class Shortcode {
         }
 
         if( !empty( $button_icon ) ){
-            $button_icon = '<img src="'.esc_url( $button_icon ).'" alt="'.esc_attr( $button_text ).'">';
+            $attachment_id = attachment_url_to_postid( $button_icon );
+            if( $attachment_id ){
+                // wp_get_attachment_image outputs explicit width/height (fixes PageSpeed "Image elements do not have explicit width and height").
+                $button_icon = wp_get_attachment_image( $attachment_id, 'full', false, array(
+                    'alt'   => $button_text,
+                    'class' => 'wishsuite-custom-icon',
+                ) );
+            } else {
+                // External/unresolved URL: fall back to size detection so width/height are still emitted.
+                $dimensions = @getimagesize( $button_icon );
+                $size_attr  = ( is_array( $dimensions ) && !empty( $dimensions[0] ) && !empty( $dimensions[1] ) )
+                    ? ' width="'.esc_attr( $dimensions[0] ).'" height="'.esc_attr( $dimensions[1] ).'"'
+                    : '';
+                $button_icon = '<img class="wishsuite-custom-icon" src="'.esc_url( $button_icon ).'" alt="'.esc_attr( $button_text ).'"'.$size_attr.'>';
+            }
         }
 
         return $button_icon.$default_loader;

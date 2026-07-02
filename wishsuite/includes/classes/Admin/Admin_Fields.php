@@ -401,6 +401,14 @@ class Admin_Fields {
                 ),
 
                 array(
+                    'name'  => 'icon_over_image',
+                    'label'  => __( 'Show remove icon over image', 'wishsuite' ),
+                    'type'  => 'checkbox',
+                    'default' => 'off',
+                    'desc'  => __( 'Overlay the remove icon on top of the product image in the wishlist table, saving horizontal space.', 'wishsuite' ),
+                ),
+
+                array(
                     'name'    => 'social_share_button_area_title',
                     'headding'=> esc_html__( 'Social share button', 'wishsuite' ),
                     'type'    => 'title',
@@ -520,9 +528,17 @@ class Admin_Fields {
                     'label'   => __( 'Added Button custom icon', 'wishsuite' ),
                     'type'    => 'image_upload',
                     'options' => [
-                        'button_label' => esc_html__( 'Upload', 'wishsuite' ),   
-                        'button_remove_label' => esc_html__( 'Remove', 'wishsuite' ),   
+                        'button_label' => esc_html__( 'Upload', 'wishsuite' ),
+                        'button_remove_label' => esc_html__( 'Remove', 'wishsuite' ),
                     ],
+                ),
+
+                array(
+                    'name'    => 'use_solid_heart',
+                    'label'   => __( 'Solid heart when added', 'wishsuite' ),
+                    'desc'    => __( 'Show a filled heart when the product is already in the wishlist (instead of the checkmark). Applies to the default icon only.', 'wishsuite' ),
+                    'type'    => 'checkbox',
+                    'default' => 'off',
                 ),
 
                 array(
@@ -555,6 +571,22 @@ class Admin_Fields {
                     'type'    => 'title',
                     'size'    => 'margin_0 regular',
                     'class' => 'button_custom_style element_section_title_area',
+                ),
+
+                array(
+                    'name'  => 'heart_icon_color',
+                    'label' => esc_html__( 'Heart icon color (default)', 'wishsuite' ),
+                    'desc'  => __( 'Color of the wishlist heart icon when the product is not yet added. Leave empty to inherit the theme/button color.', 'wishsuite' ),
+                    'type'  => 'color',
+                    'class' => 'button_custom_style',
+                ),
+
+                array(
+                    'name'  => 'heart_icon_active_color',
+                    'label' => esc_html__( 'Heart icon color (added)', 'wishsuite' ),
+                    'desc'  => __( 'Color of the wishlist heart icon when the product is already added. Leave empty to inherit the theme/button color.', 'wishsuite' ),
+                    'type'  => 'color',
+                    'class' => 'button_custom_style',
                 ),
 
                 array(

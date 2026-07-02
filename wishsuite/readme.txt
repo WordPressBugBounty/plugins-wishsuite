@@ -3,7 +3,7 @@ Contributors: htplugins, hasthemes, tarekht, zenaulislam, aslamhasib
 Tags: woocommerce, wishlist, product wishlist, wishsuite, woocommerce wishlist
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.5.5
+Stable tag: 1.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -105,6 +105,13 @@ Needs assistance to use this plugin?
 Feel free to [Contact us](https://hasthemes.com/contact-us/)
 
 == Changelog ==
+
+= Version: 1.5.6 - Date: 2026-07-02 =
+* Added: Optional "Solid heart when added" icon style for the wishlist button.
+* Added: Separate color pickers for the wishlist heart icon in default and added states.
+* Fixed: Custom button icon now outputs explicit width and height, resolving the PageSpeed "Image elements do not have explicit width and height" warning.
+* Fixed: Wishlist table thumbnails now register the configured image size so width and height are always present.
+* Fixed: Leaving the button text or remove text fields blank now falls back to the default text instead of showing nothing.
 
 = Version: 1.5.5 - Date: 2026-06-28 =
 * Added: Copy link button in the share section for one-click copying of the shareable wishlist URL.

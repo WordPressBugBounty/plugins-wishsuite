@@ -5,7 +5,7 @@
  * Plugin URI: https://hasthemes.com/plugins/
  * Author: HasThemes
  * Author URI: https://hasthemes.com/
- * Version: 1.5.5
+ * Version: 1.5.6
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: wishsuite
@@ -25,7 +25,7 @@ final class WishSuite_Base{
      *
      * @var string
      */
-    const version = '1.5.5';
+    const version = '1.5.6';
 
     /**
      * [$_instance]

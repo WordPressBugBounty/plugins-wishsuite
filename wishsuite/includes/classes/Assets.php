@@ -173,11 +173,32 @@ class Assets {
                     {$btn_bg_color}
                     {$btn_border_radius}
                 }
+                .wishsuite-button:focus{
+                    {$btn_color}
+                }
                 .wishsuite-button:hover{
                     {$btn_hover_color}
                     {$btn_hover_bg_color}
                 }
             ";
+
+            // Heart icon colors: default (not-added) and active (already added).
+            $heart_color        = wishsuite_generate_css( 'heart_icon_color', 'wishsuite_style_settings_tabs', 'fill' );
+            $heart_active_color = wishsuite_generate_css( 'heart_icon_active_color', 'wishsuite_style_settings_tabs', 'fill' );
+
+            if( $heart_color ){
+                $button_custom_css .= "
+                    .wishsuite-button svg .heart{ {$heart_color} }
+                ";
+            }
+            if( $heart_active_color ){
+                $button_custom_css .= "
+                    .wishsuite-button.added svg .check,
+                    .wishsuite-button.wishsuite-btn-exist svg .check,
+                    .wishsuite-button.added svg.wishsuite-solid-added .heart-solid,
+                    .wishsuite-button.wishsuite-btn-exist svg.wishsuite-solid-added .heart-solid{ {$heart_active_color} }
+                ";
+            }
         }
 
         // Wishlist table style
