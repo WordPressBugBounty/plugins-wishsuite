@@ -131,6 +131,7 @@ class Assets {
             'remove_on_click'      => wishsuite_get_option( 'remove_on_click', 'wishsuite_settings_tabs', 'off' ),
             'enable_success_notification' => wishsuite_get_option( 'enable_success_notification', 'wishsuite_general_tabs', 'off' ),
             'delete_guest_user_wishlist' => wishsuite_get_option( 'delete_guest_user_wishlist', 'wishsuite_general_tabs', 'off' ),
+            'hide_button_text'     => wishsuite_get_option( 'hide_button_text', 'wishsuite_settings_tabs', 'off' ),
         );
         $admin_localize_data = array(
             'ajaxurl'    => admin_url( 'admin-ajax.php' ),

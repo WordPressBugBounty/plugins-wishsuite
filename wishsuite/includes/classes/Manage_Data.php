@@ -118,17 +118,19 @@ class Manage_Data {
         $orderby = $this->sanitize_orderby( $args['orderby'] );
         $order   = $this->sanitize_order( $args['order'] );
 
+        // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- orderby/order are whitelisted via sanitize_orderby()/sanitize_order().
         $sql = $wpdb->prepare(
             "SELECT * FROM {$wpdb->prefix}wishsuite_list
             WHERE user_id = %d
             ORDER BY {$orderby} {$order}",
             $args['user_id']
         );
+        // phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
         $items = wp_cache_get( $cache_key, 'wishsuite' );
 
         if ( false === $items ) {
-            $items = $wpdb->get_results( $sql, ARRAY_A );
+            $items = $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $sql built via $wpdb->prepare() above; orderby/order are whitelisted via sanitize_orderby()/sanitize_order(), table name from $wpdb->prefix.
 
             wp_cache_set( $cache_key, $items, 'wishsuite' );
         }
@@ -159,11 +161,12 @@ class Manage_Data {
         $total_items_sql = "SELECT COUNT(DISTINCT wishlists.product_id) AS total_items
             FROM {$wpdb->prefix}wishsuite_list AS wishlists";
 
-        $total_items = (int) $wpdb->get_var($total_items_sql);
+        $total_items = (int) $wpdb->get_var($total_items_sql); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- no user input; table name from $wpdb->prefix.
 
         $orderby = $this->sanitize_orderby( $args['orderby'] );
         $order   = $this->sanitize_order( $args['order'] );
 
+        // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- orderby/order are whitelisted via sanitize_orderby()/sanitize_order().
         $sql = $wpdb->prepare(
             "SELECT *, COUNT(*) AS product_count
             FROM {$wpdb->prefix}wishsuite_list AS wishlists
@@ -172,10 +175,11 @@ class Manage_Data {
             LIMIT %d OFFSET %d",
             $args['limit'], $args['offset']
         );
+        // phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         $items = wp_cache_get( $cache_key, 'wishsuite' );
 
         if ( false === $items ) {
-            $items = $wpdb->get_results( $sql, ARRAY_A );
+            $items = $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $sql built via $wpdb->prepare() above; orderby/order are whitelisted via sanitize_orderby()/sanitize_order(), table name from $wpdb->prefix.
             wp_cache_set( $cache_key, $items, 'wishsuite' );
         }
 
@@ -207,11 +211,12 @@ class Manage_Data {
         $total_items_sql = "SELECT COUNT(DISTINCT wishlists.user_id) AS total_items
             FROM {$wpdb->prefix}wishsuite_list AS wishlists";
 
-        $total_items = (int) $wpdb->get_var($total_items_sql);
+        $total_items = (int) $wpdb->get_var($total_items_sql); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- no user input; table name from $wpdb->prefix.
 
         $orderby = $this->sanitize_orderby( $args['orderby'] );
         $order   = $this->sanitize_order( $args['order'] );
 
+        // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- orderby/order are whitelisted via sanitize_orderby()/sanitize_order().
         $sql = $wpdb->prepare(
             "SELECT *, COUNT(*) AS product_count
             FROM {$wpdb->prefix}wishsuite_list AS wishlists
@@ -220,10 +225,11 @@ class Manage_Data {
             LIMIT %d OFFSET %d",
             $args['limit'], $args['offset']
         );
+        // phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         $items = wp_cache_get( $cache_key, 'wishsuite' );
 
         if ( false === $items ) {
-            $items = $wpdb->get_results( $sql, ARRAY_A );
+            $items = $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $sql built via $wpdb->prepare() above; orderby/order are whitelisted via sanitize_orderby()/sanitize_order(), table name from $wpdb->prefix.
             wp_cache_set( $cache_key, $items, 'wishsuite' );
         }
 
@@ -256,11 +262,12 @@ class Manage_Data {
         FROM {$wpdb->prefix}wishsuite_list AS wishlists
         WHERE wishlists.user_id = %d", $args['user_id']);
 
-        $total_items = $wpdb->get_var($total_items_sql);
+        $total_items = $wpdb->get_var($total_items_sql); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $total_items_sql built via $wpdb->prepare() above.
 
         $orderby = $this->sanitize_orderby( $args['orderby'] );
         $order   = $this->sanitize_order( $args['order'] );
 
+        // phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- orderby/order are whitelisted via sanitize_orderby()/sanitize_order().
         $sql = $wpdb->prepare(
             "SELECT *
             FROM {$wpdb->prefix}wishsuite_list AS wishlists
@@ -269,10 +276,11 @@ class Manage_Data {
             LIMIT %d OFFSET %d",
             $args['user_id'], $args['limit'], $args['offset']
         );
+        // phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         $items = wp_cache_get( $cache_key, 'wishsuite' );
 
         if ( false === $items ) {
-            $items = $wpdb->get_results( $sql, ARRAY_A );
+            $items = $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $sql built via $wpdb->prepare() above; orderby/order are whitelisted via sanitize_orderby()/sanitize_order(), table name from $wpdb->prefix.
             wp_cache_set( $cache_key, $items, 'wishsuite' );
         }
 

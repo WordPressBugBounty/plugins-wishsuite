@@ -31,7 +31,10 @@ a.wishsuite-addtocart.added::after {
 
 .wishsuite-loader {
     position: absolute;
-    left: 5px;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 a.wishsuite-button::after,
@@ -62,7 +65,12 @@ a.wishsuite-btn.loading,
 .wishsuite-button img {
     display: inline-block !important;
     width: 25px !important;
-    margin: 0 10px 0 0 !important;
+    margin: 0 !important;
+}
+
+.wishsuite-custom-icon-wrap {
+    display: flex;
+    position: relative;
 }
 
 a.wishsuite-button.loading img {
@@ -73,6 +81,8 @@ a.wishsuite-button.loading img {
     display: inline-flex;
     align-items: center;
     position: relative;
+    justify-content: center;
+    gap: 10px;
 }
 
 .wishsuite-button:focus {
@@ -139,6 +149,7 @@ a.wishsuite-button.loading img {
 .wishsuite-btn-text {
     display: flex;
     align-items: center;
+    margin: 0 !important;
 }
 
 @keyframes loading {

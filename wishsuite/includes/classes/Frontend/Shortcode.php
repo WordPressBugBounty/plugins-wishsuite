@@ -86,6 +86,8 @@ class Shortcode {
             $page_url = wishsuite_get_page_url();
         }
 
+        $hide_button_text = ( 'on' === wishsuite_get_option( 'hide_button_text', 'wishsuite_settings_tabs', 'off' ) );
+
         $button_class = array(
             'wishsuite-btn',
             'wishsuite-button',
@@ -114,38 +116,51 @@ class Shortcode {
 
         $button_icon        = $this->icon_generate();
         $added_button_icon  = $this->icon_generate('added');
-        
-        if( !empty( $button_text ) ){
+
+        // Plain labels kept for aria-label regardless of the hide-text option, since the
+        // link still needs a discernible name for screen readers when text isn't printed.
+        $button_text_label  = $button_text;
+        $button_exist_label = ( $remove_on_click === 'off' ) ? $button_exist_text : $remove_button_text;
+
+        if( !empty( $button_text ) && ! $hide_button_text ){
             $button_text = '<span class="wishsuite-btn-text">'.wp_kses_post($button_text).'</span>';
+        } else {
+            $button_text = '';
         }
-        
+
         if($remove_on_click === 'off' ){
-            if(!empty( $button_exist_text )){
+            if(!empty( $button_exist_text ) && ! $hide_button_text ){
                 $button_exist_text = '<span class="wishsuite-btn-text">'.wp_kses_post($button_exist_text).'</span>';
+            } else {
+                $button_exist_text = '';
             }
         } else {
-            $button_exist_text = '<span class="wishsuite-btn-text">'.wp_kses_post($remove_button_text).'</span>';
+            $button_exist_text = $hide_button_text ? '' : '<span class="wishsuite-btn-text">'.wp_kses_post($remove_button_text).'</span>';
         }
-        
+
         if($remove_on_click === 'off' ){
-            if(!empty( $button_added_text )){
+            if(!empty( $button_added_text ) && ! $hide_button_text ){
                 $button_added_text = '<span class="wishsuite-btn-text">'.wp_kses_post($button_added_text).'</span>';
+            } else {
+                $button_added_text = '';
             }
         } else {
-            $button_added_text = '<span class="wishsuite-btn-text">'.wp_kses_post($remove_button_text).'</span>';
+            $button_added_text = $hide_button_text ? '' : '<span class="wishsuite-btn-text">'.wp_kses_post($remove_button_text).'</span>';
         }
 
         // Shortcode atts
         $default_atts = array(
-            'product_id'        => $product_id,
-            'product_title'     => $product_title,
-            'button_url'        => $page_url,
-            'button_class'      => implode(' ', $button_class ),
-            'button_text'       => $button_icon.$button_text,
-            'button_added_text' => $added_button_icon.$button_added_text,
-            'button_exist_text' => $added_button_icon.$button_exist_text,
-            'has_product'       => $has_product,
-            'template_name'     => ( $has_product === true ) ? 'exist' : 'add',
+            'product_id'          => $product_id,
+            'product_title'       => $product_title,
+            'button_url'          => $page_url,
+            'button_class'        => implode(' ', $button_class ),
+            'button_text'         => $button_icon.$button_text,
+            'button_added_text'   => $added_button_icon.$button_added_text,
+            'button_exist_text'   => $added_button_icon.$button_exist_text,
+            'button_text_label'   => $button_text_label,
+            'button_exist_label'  => $button_exist_label,
+            'has_product'         => $has_product,
+            'template_name'       => ( $has_product === true ) ? 'exist' : 'add',
         );
         $atts = shortcode_atts( $default_atts, $atts, $content );
 
@@ -155,6 +170,8 @@ class Shortcode {
         $atts['button_text'] = wp_kses( $atts['button_text'], $allowed_html );
         $atts['button_added_text'] = wp_kses( $atts['button_added_text'], $allowed_html );
         $atts['button_exist_text'] = wp_kses( $atts['button_exist_text'], $allowed_html );
+        $atts['button_text_label'] = sanitize_text_field( $atts['button_text_label'] );
+        $atts['button_exist_label'] = sanitize_text_field( $atts['button_exist_label'] );
 
         return Manage_Wishlist::instance()->button_html( $atts );
 
@@ -292,7 +309,7 @@ class Shortcode {
             }
         }
 
-        return $button_icon.$default_loader;
+        return '<span class="wishsuite-custom-icon-wrap">'.$button_icon.$default_loader.'</span>';
 
     }
 

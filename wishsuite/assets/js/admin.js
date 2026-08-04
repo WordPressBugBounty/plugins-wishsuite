@@ -21,6 +21,7 @@
     wishsuiteConditionField( WishSuite.option_data['remove_on_click'], 'on', '.depend_remove_on_click_enable' );
     wishsuiteConditionField( WishSuite.option_data['enable_success_notification'], 'on', '.depend_enable_success_notification' );
     wishsuiteConditionField( WishSuite.option_data['delete_guest_user_wishlist'], 'on', '.depend_delete_guest_user_wishlist' );
+    wishsuiteConditionField( WishSuite.option_data['hide_button_text'], 'off', '.depend_hide_button_text_disable' );
 
     // After Select field change Condition Field
     wishsuiteChangeField( '.button_icon_type select', '.button_custom_icon', 'custom' );
@@ -37,6 +38,9 @@
     wishsuiteChangeField( '.remove_on_click .checkbox', '.depend_remove_on_click_enable', 'on', 'radio' );
     wishsuiteChangeField( '.enable_success_notification .checkbox', '.depend_enable_success_notification', 'on', 'radio' );
     wishsuiteChangeField( '.delete_guest_user_wishlist .checkbox', '.depend_delete_guest_user_wishlist', 'on', 'radio' );
+    $( '.hide_button_text .checkbox' ).on( 'change', function(){
+        wishsuiteConditionField( $(this).is(':checked') ? 'on' : 'off', 'off', '.depend_hide_button_text_disable' );
+    });
 
     function wishsuiteChangeField( filedselector, selector, condition_value, fieldtype = 'select' ){
         $(filedselector).on('change',function(){

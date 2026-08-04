@@ -2,6 +2,7 @@
 	if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 	$idsString = is_array( $products_ids ) ? implode( ',',$products_ids ) : '';
+	$qtyString = isset( $products_qty ) && is_array( $products_qty ) ? implode( ',',$products_qty ) : '';
 
 	// In AJAX (e.g. after removing an item) get_the_permalink() resolves to admin-ajax.php,
 	// so fall back to the page that triggered the request.
@@ -9,8 +10,8 @@
 	if ( ! $share_base ) {
 		$share_base = home_url( '/' );
 	}
-	$share_base = remove_query_arg( 'wishsuitepids', $share_base );
-	$share_link = add_query_arg( 'wishsuitepids', $idsString, $share_base );
+	$share_base = remove_query_arg( array( 'wishsuitepids', 'wishsuiteqty' ), $share_base );
+	$share_link = add_query_arg( array( 'wishsuitepids' => $idsString, 'wishsuiteqty' => $qtyString ), $share_base );
 	$share_title = get_the_title();
 
 	$thumb_id = get_post_thumbnail_id();
@@ -78,16 +79,16 @@
 
 ?>
 
-<div class="wishsuite-social-share">
-	<span class="wishsuite-social-title"><?php esc_html_e( $button_text, 'wishsuite' ); ?></span>
+<div class="wishsuite-social-share" data-share-base="<?php echo esc_url( $share_base ); ?>" data-title="<?php echo esc_attr( $share_title ); ?>" data-thumb="<?php echo esc_url( ! empty( $thumb_url[0] ) ? $thumb_url[0] : '' ); ?>">
+	<span class="wishsuite-social-title"><?php echo esc_html( $button_text ); ?></span>
 	<ul>
 		<?php
 			foreach ( $button_list as $buttonkey => $button ) {
 				?>
 				<li>
-					<a rel="nofollow" href="<?php echo esc_url( $social_button_list[$buttonkey]['url'] ); ?>" <?php echo ( $buttonkey === 'email' ? '' : 'target="_blank"' ) ?>>
+					<a rel="nofollow" data-platform="<?php echo esc_attr( $buttonkey ); ?>" href="<?php echo esc_url( $social_button_list[$buttonkey]['url'] ); ?>" <?php echo ( $buttonkey === 'email' ? '' : 'target="_blank"' ) ?>>
 						<span class="wishsuite-social-icon">
-							<?php echo wishsuite_icon_list( $buttonkey ); ?>
+							<?php echo wishsuite_icon_list( $buttonkey ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static trusted SVG markup; wp_kses_post() would strip the svg/path tags. ?>
 						</span>
 					</a>
 				</li>
@@ -98,7 +99,7 @@
 			<li class="wishsuite-copy-link-item">
 				<button type="button" class="wishsuite-copy-link" data-clipboard="<?php echo esc_url( $share_link ); ?>" data-tooltip="<?php echo esc_attr( $copy_link_title ); ?>" data-copied="<?php esc_attr_e( 'Copied', 'wishsuite' ); ?>" aria-label="<?php echo esc_attr( $copy_link_title ); ?>">
 					<span class="wishsuite-social-icon">
-						<?php echo wishsuite_icon_list( 'copy_link' ); ?>
+						<?php echo wishsuite_icon_list( 'copy_link' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static trusted SVG markup; wp_kses_post() would strip the svg/path tags. ?>
 					</span>
 				</button>
 			</li>

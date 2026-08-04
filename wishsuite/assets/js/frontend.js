@@ -213,7 +213,53 @@
     // Quentity
     $("div.wishsuite-table-content").on("change", "input.qty", function() {
         $(this).closest('tr').find( "[data-quantity]" ).attr( "data-quantity", this.value );
+        updateWishsuiteShareLinks();
     });
+
+    // Rebuild social share / copy links so they carry each product's current quantity
+    function updateWishsuiteShareLinks() {
+        var $share = $('.wishsuite-social-share');
+        if ( ! $share.length ) return;
+
+        var ids = [], qtys = [];
+        $('.wishsuite-table-content tbody tr').each(function() {
+            var $row = $(this);
+            var $productEl = $row.find('[data-product_id]').first();
+            if ( ! $productEl.length ) return;
+            ids.push( $productEl.data('product_id') );
+            qtys.push( $row.find('input.qty').val() || 1 );
+        });
+        if ( ! ids.length ) return;
+
+        var shareBase = $share.data('share-base');
+        if ( ! shareBase ) return;
+
+        var title     = $share.data('title') || '';
+        var thumb     = $share.data('thumb') || '';
+        var sep       = shareBase.indexOf('?') > -1 ? '&' : '?';
+        var shareUrl  = shareBase + sep + 'wishsuitepids=' + ids.join(',') + '&wishsuiteqty=' + qtys.join(',');
+        var encodedUrl = encodeURIComponent( shareUrl );
+
+        var hrefByPlatform = {
+            facebook:       'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl,
+            twitter:        'https://twitter.com/share?url=' + encodedUrl + '&text=' + encodeURIComponent( title ),
+            pinterest:      'https://pinterest.com/pin/create/button/?url=' + encodedUrl + '&media=' + encodeURIComponent( thumb ),
+            linkedin:       'https://www.linkedin.com/shareArticle?mini=true&url=' + encodedUrl + '&title=' + encodeURIComponent( title ),
+            email:          'mailto:?subject=' + encodeURIComponent( title ) + '&body=' + encodedUrl,
+            reddit:         'http://reddit.com/submit?url=' + encodedUrl + '&title=' + encodeURIComponent( title ),
+            telegram:       'https://telegram.me/share/url?url=' + encodedUrl,
+            odnoklassniki:  'https://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=' + encodedUrl,
+            whatsapp:       'https://wa.me/?text=' + encodedUrl,
+            vk:             'https://vk.com/share.php?url=' + encodedUrl,
+        };
+
+        $share.find('a[data-platform]').each(function() {
+            var href = hrefByPlatform[ $(this).data('platform') ];
+            if ( href ) $(this).attr('href', href);
+        });
+
+        $share.find('.wishsuite-copy-link').attr('data-clipboard', shareUrl);
+    }
 
     // Delete table row after added to cart
     $(document).on('added_to_cart',function( e, fragments, carthash, button ){

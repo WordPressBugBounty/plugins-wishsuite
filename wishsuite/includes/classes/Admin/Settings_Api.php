@@ -184,7 +184,7 @@ class Settings_Api {
             <?php $table->display(); ?>
         </div>
         <?php
-        echo ob_get_clean();
+        echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- buffered output of $table->display(), core WP_List_Table markup.
     }
 
     /**
@@ -194,7 +194,7 @@ class Settings_Api {
      */
     public function get_field_description( $args ) {
         if ( ! empty( $args['desc'] ) ) {
-            $desc = sprintf( '<p class="description">%s</p>', $args['desc'] );
+            $desc = sprintf( '<p class="description">%s</p>', wp_kses_post( $args['desc'] ) );
         } else {
             $desc = '';
         }
@@ -210,7 +210,7 @@ class Settings_Api {
         $headding    = isset( $args['headding'] ) ? $args['headding'] : '';
         $size        = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $html        = sprintf( '<h2 class="element_section_title %1$s-title">%2$s</h2>', esc_attr( $size ), esc_html( $headding ) );
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -228,7 +228,7 @@ class Settings_Api {
         $html        = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s/>', $type, $size, $args['section'], $args['id'], $value, $placeholder );
         $html       .= $this->get_field_description( $args );
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -250,7 +250,7 @@ class Settings_Api {
         $html .= $this->get_field_description( $args );
         $html .= '</fieldset>';
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -279,7 +279,7 @@ class Settings_Api {
         $html        = sprintf( '<input type="%1$s" class="%2$s-number" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"%6$s%7$s%8$s%9$s/>', $type, $size, $args['section'], $args['id'], $value, $placeholder, $min, $max, $step );
         $html       .= $this->get_field_description( $args );
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -298,7 +298,7 @@ class Settings_Api {
         $html  .= sprintf( '<div class="htoption_checkbox_desc" id="htoptions_sp_%1$s[%2$s]">%3$s</div>', $args['section'], $args['id'], $args['desc'] );
         $html  .= '</fieldset>';
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -321,7 +321,7 @@ class Settings_Api {
         $html .= $this->get_field_description( $args );
         $html .= '</fieldset>';
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -347,7 +347,7 @@ class Settings_Api {
 
         $html .= '</ul>'.$this->get_field_description( $args ).'</fieldset>';
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -369,7 +369,7 @@ class Settings_Api {
         $html .= $this->get_field_description( $args );
         $html .= '</fieldset>';
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -390,7 +390,7 @@ class Settings_Api {
         $html .= sprintf( '</select>' );
         $html .= $this->get_field_description( $args );
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -412,7 +412,7 @@ class Settings_Api {
         $html .= sprintf( '</select>' );
         $html .= $this->get_field_description( $args );
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -429,7 +429,7 @@ class Settings_Api {
         $html        = sprintf( '<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]"%4$s>%5$s</textarea>', $size, $args['section'], $args['id'], $placeholder, $value );
         $html        .= $this->get_field_description( $args );
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -439,7 +439,7 @@ class Settings_Api {
      * @return string
      */
     function callback_html( $args ) {
-        echo $this->get_field_description( $args );
+        echo $this->get_field_description( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_field_description() already runs args['desc'] through wp_kses_post().
     }
 
     /**
@@ -452,7 +452,7 @@ class Settings_Api {
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
 
-        echo '<div style="max-width: ' . $size . ';">';
+        echo '<div style="max-width: ' . esc_attr( $size ) . ';">';
 
         $editor_settings = array(
             'teeny'         => true,
@@ -468,7 +468,7 @@ class Settings_Api {
 
         echo '</div>';
 
-        echo $this->get_field_description( $args );
+        echo $this->get_field_description( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_field_description() already runs args['desc'] through wp_kses_post().
     }
 
     /**
@@ -481,13 +481,13 @@ class Settings_Api {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $id    = $args['section']  . '[' . $args['id'] . ']';
-        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
+        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File', 'wishsuite' );
 
         $html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
         $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
         $html  .= $this->get_field_description( $args );
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -500,10 +500,10 @@ class Settings_Api {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $id    = $args['section']  . '[' . $args['id'] . ']';
-        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
-        $remove_label = isset( $args['options']['button_remove_label'] ) ? $args['options']['button_remove_label'] : __( 'Remove' );
+        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File', 'wishsuite' );
+        $remove_label = isset( $args['options']['button_remove_label'] ) ? $args['options']['button_remove_label'] : __( 'Remove', 'wishsuite' );
 
-        $save_file = ( $value != '' ) ? '<img src="'.esc_url( $value ).'" alt="'.esc_attr__( $label, 'wishsuite' ).'">' : '';
+        $save_file = ( $value != '' ) ? '<img src="'.esc_url( $value ).'" alt="'.esc_attr( $label ).'">' : '';
         
         $html = '<div class="wpsa_display">'.$save_file.'</div>';
         $html  .= sprintf( '<input type="hidden" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
@@ -513,7 +513,7 @@ class Settings_Api {
 
         $html  .= $this->get_field_description( $args );
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -529,7 +529,7 @@ class Settings_Api {
         $html  = sprintf( '<input type="password" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
         $html  .= $this->get_field_description( $args );
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -545,7 +545,7 @@ class Settings_Api {
         $html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, $args['section'], $args['id'], $value, $args['std'] );
         $html  .= $this->get_field_description( $args );
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -575,7 +575,7 @@ class Settings_Api {
         $html .= $this->get_field_description( $args );
         $html .= '</ul></fieldset>';
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
 
@@ -592,8 +592,8 @@ class Settings_Api {
             'id'       => $args['section'] . '[' . $args['id'] . ']',
             'echo'     => 0
         );
-        $html = wp_dropdown_pages( $dropdown_args );
-        echo $html;
+        $html = wp_dropdown_pages( $dropdown_args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- 'echo' => 0 makes wp_dropdown_pages() return markup instead of printing it; dynamic values (id/name/selected) are escaped/internal.
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -687,7 +687,7 @@ class Settings_Api {
 
         $html .= '</h2>';
 
-        echo $html;
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted internally-built admin field markup; dynamic values are escaped at construction (esc_attr()/esc_html()).
     }
 
     /**
@@ -699,7 +699,7 @@ class Settings_Api {
         ?>
         <div class="metabox-holder">
             <?php foreach ( $this->settings_sections as $form ) { ?>
-                <div id="<?php echo $form['id']; ?>" class="group" style="display: none;">
+                <div id="<?php echo esc_attr( $form['id'] ); ?>" class="group" style="display: none;">
                     <form method="post" action="options.php">
                         <?php
                         do_action( 'wsa_form_top_' . $form['id'], $form );

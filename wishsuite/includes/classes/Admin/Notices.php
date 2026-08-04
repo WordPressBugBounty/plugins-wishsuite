@@ -63,8 +63,8 @@ class Notices {
                 __( '%1$sWishSuite%2$s requires %1$s"WooCommerce"%2$s plugin to be installed and activated. Please install WooCommerce to continue.', 'wishsuite' ), '<strong>', '</strong>' );
             $button_text = __( 'Install WooCommerce', 'wishsuite' );
         }
-        $button = '<p><a href="' . $activation_url . '" class="button-primary">' . $button_text . '</a></p>';
-        printf( '<div class="error"><p>%1$s</p>%2$s</div>', $message, $button );
+        $button = '<p><a href="' . esc_url( $activation_url ) . '" class="button-primary">' . esc_html( $button_text ) . '</a></p>';
+        printf( '<div class="error"><p>%1$s</p>%2$s</div>', wp_kses_post( $message ), wp_kses_post( $button ) );
     }
     
 

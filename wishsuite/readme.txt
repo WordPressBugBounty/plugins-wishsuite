@@ -3,7 +3,7 @@ Contributors: htplugins, hasthemes, tarekht, zenaulislam, aslamhasib
 Tags: woocommerce, wishlist, product wishlist, wishsuite, woocommerce wishlist
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.5.6
+Stable tag: 1.5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -105,6 +105,11 @@ Needs assistance to use this plugin?
 Feel free to [Contact us](https://hasthemes.com/contact-us/)
 
 == Changelog ==
+
+= Version: 1.5.7 - Date: 2026-08-04 =
+* Added: Selected quantity is now carried over in wishlist share links.
+* Added: "Hide Button Text" option to show the wishlist button as icon-only.
+* Fixed: Wishlist button now keeps a discernible accessible name (aria-label) even when the button text is hidden.
 
 = Version: 1.5.6 - Date: 2026-07-02 =
 * Added: Optional "Solid heart when added" icon style for the wishlist button.

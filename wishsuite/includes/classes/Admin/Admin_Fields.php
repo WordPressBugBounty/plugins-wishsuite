@@ -285,12 +285,21 @@ class Admin_Fields {
                 ),
 
                 array(
+                    'name'    => 'hide_button_text',
+                    'label'   => __( 'Hide Button Text', 'wishsuite' ),
+                    'type'    => 'checkbox',
+                    'default' => 'off',
+                    'desc'    => __( 'Show icon only and hide the wishlist button text.', 'wishsuite' ),
+                ),
+
+                array(
                     'name'        => 'button_text',
                     'label'       => __( 'Button Text', 'wishsuite' ),
                     'desc'        => __( 'Enter your wishlist button text.', 'wishsuite' ),
                     'type'        => 'text',
                     'default'     => __( 'Wishlist', 'wishsuite' ),
                     'placeholder' => __( 'Wishlist', 'wishsuite' ),
+                    'class'       => 'depend_hide_button_text_disable',
                 ),
 
                 array(
@@ -300,6 +309,7 @@ class Admin_Fields {
                     'type'        => 'text',
                     'default'     => __( 'Product Added', 'wishsuite' ),
                     'placeholder' => __( 'Product Added', 'wishsuite' ),
+                    'class'       => 'depend_hide_button_text_disable',
                 ),
 
                 array(
@@ -309,6 +319,7 @@ class Admin_Fields {
                     'type'        => 'text',
                     'default'     => __( 'Product already added', 'wishsuite' ),
                     'placeholder' => __( 'Product already added', 'wishsuite' ),
+                    'class'       => 'depend_hide_button_text_disable',
                 ),
 
             ),

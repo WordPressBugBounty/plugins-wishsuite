@@ -567,6 +567,20 @@ class Manage_Wishlist {
             return array();
         }
 
+        // Shared-link quantity: ?wishsuiteqty=4,2 lines up index-for-index with wishsuitepids.
+        $shared_qty_map = array();
+        if ( ( $shareablebtn === 'on' ) && isset( $_GET['wishsuiteqty'] ) ) {
+            $query_perametter_qty = sanitize_text_field( $_GET['wishsuiteqty'] );
+            if( !empty( $query_perametter_qty ) ){
+                $qty_values = explode( ',', $query_perametter_qty );
+                foreach ( $ids as $index => $pid ) {
+                    if ( isset( $qty_values[ $index ] ) && is_numeric( $qty_values[ $index ] ) && $qty_values[ $index ] > 0 ) {
+                        $shared_qty_map[ $pid ] = absint( $qty_values[ $index ] );
+                    }
+                }
+            }
+        }
+
         $args = array(
             'include' => $ids,
             'limit' => $limit,
@@ -591,7 +605,9 @@ class Manage_Wishlist {
             $average        = $product->get_average_rating();
 
             $get_row = \WishSuite\Manage_Data::instance()->read_single_item( get_current_user_id(), $product->get_id() );
-            if( is_object( $get_row ) && $get_row->quantity ){
+            if ( isset( $shared_qty_map[ $product->get_id() ] ) ) {
+                $min_value = $shared_qty_map[ $product->get_id() ];
+            } elseif( is_object( $get_row ) && $get_row->quantity ){
                 $min_value = $get_row->quantity;
             }else{
                 $min_value = $product->get_min_purchase_quantity();
@@ -613,6 +629,7 @@ class Manage_Wishlist {
                 'rating'        => wc_get_rating_html( $average, $rating_count ),
                 'add_to_cart'   => $this->add_to_cart_html( $product, $min_value ) ? $this->add_to_cart_html( $product, $min_value ) : $data_none,
                 'quantity'      => woocommerce_quantity_input( $quantity_args, $product, false ),
+                'quantity_value' => $min_value,
                 'dimensions'    => wc_format_dimensions( $product->get_dimensions( false ) ),
                 'description'   => $product->get_short_description() ? $product->get_short_description() : $data_none,
                 'weight'        => $product->get_weight() ? $product->get_weight() : $data_none,
@@ -724,7 +741,25 @@ class Manage_Wishlist {
                 break;
 
             case 'quantity':
-                echo $product[ $field_id ];
+                // wp_kses_post() strips <input>; the quantity field's HTML is trusted core
+                // WooCommerce output (woocommerce_quantity_input()), so allow input explicitly.
+                echo wp_kses( $product[ $field_id ], array_merge( wp_kses_allowed_html( 'post' ), array(
+                    'input' => array(
+                        'type'         => true,
+                        'id'           => true,
+                        'class'        => true,
+                        'name'         => true,
+                        'value'        => true,
+                        'step'         => true,
+                        'min'          => true,
+                        'max'          => true,
+                        'size'         => true,
+                        'title'        => true,
+                        'placeholder'  => true,
+                        'inputmode'    => true,
+                        'data-quantity'=> true,
+                    ),
+                ) ) );
                 break;
 
             case 'ratting':
@@ -732,7 +767,7 @@ class Manage_Wishlist {
                 break;
 
             case 'add_to_cart':
-                echo apply_filters( 'wishsuite_add_to_cart_btn', $product[ $field_id ] );
+                echo wp_kses_post( apply_filters( 'wishsuite_add_to_cart_btn', $product[ $field_id ] ) );
                 break;
 
             case 'attribute':
@@ -742,12 +777,12 @@ class Manage_Wishlist {
             case 'weight':
                 if ( $product[ $field_id ] ) {
                     $unit = $product[ $field_id ] !== '-' ? get_option( 'woocommerce_weight_unit' ) : '';
-                    echo wc_format_localized_decimal( $product[ $field_id ] ) . ' ' . esc_attr( $unit );
+                    echo esc_html( wc_format_localized_decimal( $product[ $field_id ] ) . ' ' . $unit );
                 } 
                 break;
 
             case 'description':
-                echo apply_filters( 'woocommerce_short_description', $product[ $field_id ] );
+                echo wp_kses_post( apply_filters( 'woocommerce_short_description', $product[ $field_id ] ) );
                 break;
 
             default:
@@ -859,10 +894,18 @@ class Manage_Wishlist {
             return;
         }
 
-        $ids = $this->get_wishlist_products();
+        $products_data = $this->get_products_data();
+
+        $ids  = array();
+        $qtys = array();
+        foreach ( $products_data as $product_id => $product ) {
+            $ids[]  = $product_id;
+            $qtys[] = isset( $product['quantity_value'] ) ? $product['quantity_value'] : 1;
+        }
 
         $atts = [
             'products_ids' => $ids,
+            'products_qty' => $qtys,
         ];
         $social_share_attr = apply_filters( 'wishsuite_social_share_arg', $atts );
         wishsuite_get_template( 'wishsuite-social-share.php', $social_share_attr, true );
@@ -892,6 +935,6 @@ class Manage_Wishlist {
             'add_args' => true,
             'add_fragment' => ''
         );
-        echo '<nav class="wishsuite-pagination">' . paginate_links($args) . '</nav>';
+        echo '<nav class="wishsuite-pagination">' . wp_kses_post( paginate_links( $args ) ) . '</nav>';
     }
 }
