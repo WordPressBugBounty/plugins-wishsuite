@@ -102,8 +102,15 @@ class Manage_Wishlist {
             $products = $this->get_wishlist_products();
             $products[] = $id;
 
-            setcookie( $temp_id_key, $temp_user_id, 0, COOKIEPATH, COOKIE_DOMAIN, false, false );
-            setcookie( $cookie_name, json_encode( $products ), 0, COOKIEPATH, COOKIE_DOMAIN, false, false );
+            $cookie_days = (int) wishsuite_get_option( 'delete_guest_user_wishlist_days', 'wishsuite_general_tabs', 30 );
+            if ( $cookie_days <= 0 ) {
+                $cookie_days = 30;
+            }
+            $expiration = time() + ( $cookie_days * DAY_IN_SECONDS );
+
+            setcookie( $temp_id_key, $temp_user_id, $expiration, COOKIEPATH, COOKIE_DOMAIN, false, false );
+            setcookie( $cookie_name, json_encode( $products ), $expiration, COOKIEPATH, COOKIE_DOMAIN, false, false );
+            $_COOKIE[$temp_id_key] = $temp_user_id;
             $_COOKIE[$cookie_name] = json_encode( $products );
 
             $insert_id = \WishSuite\Manage_Data::instance()->create( [
@@ -149,10 +156,16 @@ class Manage_Wishlist {
                 }
 
                 if ( empty( $products ) ) {
-                    setcookie( $cookie_name, false, 0, COOKIEPATH, COOKIE_DOMAIN, false, false );
+                    setcookie( $cookie_name, '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN, false, false );
                     $_COOKIE[$cookie_name] = false;
                 } else {
-                    setcookie( $cookie_name, json_encode( $products ), 0, COOKIEPATH, COOKIE_DOMAIN, false, false );
+                    $cookie_days = (int) wishsuite_get_option( 'delete_guest_user_wishlist_days', 'wishsuite_general_tabs', 30 );
+                    if ( $cookie_days <= 0 ) {
+                        $cookie_days = 30;
+                    }
+                    $expiration = time() + ( $cookie_days * DAY_IN_SECONDS );
+
+                    setcookie( $cookie_name, json_encode( $products ), $expiration, COOKIEPATH, COOKIE_DOMAIN, false, false );
                     $_COOKIE[$cookie_name] = json_encode( $products );
                 }
                 
@@ -171,6 +184,32 @@ class Manage_Wishlist {
 
         self::$cached_wishlist = null;
         return $delete_status;
+    }
+
+    /**
+     * [update_product_quantity] Update product quantity in wishlist
+     * @param  [int] $id Product ID
+     * @param  [int] $quantity New quantity
+     * @return [int|bool]
+     */
+    public function update_product_quantity( $id, $quantity ) {
+        self::$cached_wishlist = null;
+
+        $user_id = get_current_user_id();
+        if ( ! $user_id ) {
+            $temp_id_key = 'wishsuite_temp_user_id';
+            $user_id = ! empty( $_COOKIE[ $temp_id_key ] ) ? sanitize_text_field( $_COOKIE[ $temp_id_key ] ) : false;
+        }
+
+        if ( $user_id ) {
+            return \WishSuite\Manage_Data::instance()->update( [
+                'user_id'    => $user_id,
+                'product_id' => $id,
+                'quantity'   => (int) $quantity,
+            ] );
+        }
+
+        return false;
     }
 
     /**
@@ -604,7 +643,13 @@ class Manage_Wishlist {
             $rating_count   = $product->get_rating_count();
             $average        = $product->get_average_rating();
 
-            $get_row = \WishSuite\Manage_Data::instance()->read_single_item( get_current_user_id(), $product->get_id() );
+            $current_user_id = get_current_user_id();
+            if ( ! $current_user_id ) {
+                $temp_id_key = 'wishsuite_temp_user_id';
+                $current_user_id = ! empty( $_COOKIE[ $temp_id_key ] ) ? sanitize_text_field( $_COOKIE[ $temp_id_key ] ) : 0;
+            }
+
+            $get_row = \WishSuite\Manage_Data::instance()->read_single_item( $current_user_id, $product->get_id() );
             if ( isset( $shared_qty_map[ $product->get_id() ] ) ) {
                 $min_value = $shared_qty_map[ $product->get_id() ];
             } elseif( is_object( $get_row ) && $get_row->quantity ){
@@ -681,6 +726,11 @@ class Manage_Wishlist {
             $fields = $default_show;
         }
 
+        $shareablebtn = wishsuite_get_option( 'enable_social_share', 'wishsuite_table_settings_tabs', 'on' );
+        if ( ( 'on' === $shareablebtn ) && isset( $_GET['wishsuitepids'] ) ) {
+            unset( $fields['remove'] );
+        }
+
         return $fields;
     }
 
@@ -722,10 +772,13 @@ class Manage_Wishlist {
 
             case 'image':
                 $icon_over = ( 'on' === wishsuite_get_option( 'icon_over_image', 'wishsuite_table_settings_tabs', 'off' ) );
+                $shareablebtn = wishsuite_get_option( 'enable_social_share', 'wishsuite_table_settings_tabs', 'on' );
+                $is_shared_page = ( 'on' === $shareablebtn ) && isset( $_GET['wishsuitepids'] );
+                $show_icon_over = $icon_over && ! $is_shared_page;
                 ?>
-                    <div class="wishsuite-image-wrap<?php echo $icon_over ? ' wishsuite-icon-over-image' : ''; ?>">
+                    <div class="wishsuite-image-wrap<?php echo $show_icon_over ? ' wishsuite-icon-over-image' : ''; ?>">
                         <a href="<?php echo esc_url( get_permalink( $product['id'] ) ); ?>"> <?php echo wp_kses_post( $product['image'] ); ?> </a>
-                        <?php if ( $icon_over ) : ?>
+                        <?php if ( $show_icon_over ) : ?>
                             <a href="#" class="wishsuite-remove wishsuite-remove-overlay" data-product-title="<?php echo esc_attr( $product['title'] ); ?>" data-product_id="<?php echo esc_attr( $product['id'] ); ?>">&nbsp;</a>
                         <?php endif; ?>
                     </div>

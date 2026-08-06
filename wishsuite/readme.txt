@@ -1,9 +1,9 @@
 === WishSuite - Wishlist for WooCommerce ===
-Contributors: htplugins, hasthemes, tarekht, zenaulislam, aslamhasib
+Contributors: htplugins, hasthemes, zenaulislam, aslamhasib
 Tags: woocommerce, wishlist, product wishlist, wishsuite, woocommerce wishlist
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.5.7
+Stable tag: 1.5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -105,6 +105,12 @@ Needs assistance to use this plugin?
 Feel free to [Contact us](https://hasthemes.com/contact-us/)
 
 == Changelog ==
+
+= Version: 1.5.8 - Date: 2026-08-06 =
+* Added: Persistent wishlist item quantity updates across page refreshes for both registered users and guests.
+* Fixed: Guest wishlist items expiration issue by calculating proper cookie expiration times and providing default fallback days for cron cleanup.
+* Fixed: Removed the "X" remove icon on shared wishlist pages to prevent visitors from accidentally removing items from their own wishlist.
+* Fixed: Added z-index to wishlist button styling to prevent overlapping issues with site headers.
 
 = Version: 1.5.7 - Date: 2026-08-04 =
 * Added: Selected quantity is now carried over in wishlist share links.

@@ -34,13 +34,16 @@ class Cron_Job {
     }
     public static function remove_guest_old_wishlist_items () {
         global $wpdb;
-        $delete_guest_user_wishlist_days = wishsuite_get_option( 'delete_guest_user_wishlist_days', 'wishsuite_general_tabs' );
+        $delete_guest_user_wishlist_days = (int) wishsuite_get_option( 'delete_guest_user_wishlist_days', 'wishsuite_general_tabs', 30 );
+        if ( $delete_guest_user_wishlist_days <= 0 ) {
+            $delete_guest_user_wishlist_days = 30;
+        }
         $result = $wpdb->get_results(
             $wpdb->prepare(
                 "SELECT user_id, id
                 FROM {$wpdb->prefix}wishsuite_list
                 WHERE date_added < DATE_SUB(CURDATE(), INTERVAL %d DAY)",
-                (int) $delete_guest_user_wishlist_days
+                $delete_guest_user_wishlist_days
             )
         );
         if($result) {

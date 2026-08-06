@@ -210,10 +210,30 @@
         ajaxRequestToRemoveItem($this, $table, product_id, success_message);
     });
 
-    // Quentity
-    $("div.wishsuite-table-content").on("change", "input.qty", function() {
-        $(this).closest('tr').find( "[data-quantity]" ).attr( "data-quantity", this.value );
+    // Quantity
+    var wishsuiteQuantityTimer = null;
+    $("div.wishsuite-table-content").on("change input", "input.qty", function() {
+        var $input = $(this);
+        $input.closest('tr').find( "[data-quantity]" ).attr( "data-quantity", this.value );
         updateWishsuiteShareLinks();
+
+        clearTimeout(wishsuiteQuantityTimer);
+        var productId = $input.closest('tr').find('[data-product_id]').first().data('product_id');
+        var newQty = parseFloat($input.val());
+        if (productId && newQty > 0) {
+            wishsuiteQuantityTimer = setTimeout(function() {
+                $.ajax({
+                    url: WishSuite.ajaxurl,
+                    method: 'POST',
+                    data: {
+                        action: 'wishsuite_update_quantity',
+                        id: productId,
+                        quantity: newQty,
+                        nonce: WishSuite.nonce
+                    }
+                });
+            }, 500);
+        }
     });
 
     // Rebuild social share / copy links so they carry each product's current quantity

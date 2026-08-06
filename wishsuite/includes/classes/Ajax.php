@@ -44,6 +44,10 @@ class Ajax {
         add_action( 'wp_ajax_wishsuite_insert_to_cart', [ $this, 'insert_to_cart' ] );
         add_action( 'wp_ajax_nopriv_wishsuite_insert_to_cart', [ $this, 'insert_to_cart' ] );
 
+        // Update Quantity Ajax Callback
+        add_action( 'wp_ajax_wishsuite_update_quantity', [ $this, 'update_quantity' ] );
+        add_action( 'wp_ajax_nopriv_wishsuite_update_quantity', [ $this, 'update_quantity' ] );
+
     }
 
     /**
@@ -177,5 +181,25 @@ class Ajax {
         
     }
 
+    /**
+     * [update_quantity] Update wishlist item quantity ajax callback
+     */
+    public function update_quantity() {
+        check_ajax_referer( 'wishsuite_nonce', 'nonce' );
+        $id       = isset( $_REQUEST['id'] ) ? absint( $_REQUEST['id'] ) : 0;
+        $quantity = isset( $_REQUEST['quantity'] ) ? absint( $_REQUEST['quantity'] ) : 1;
+
+        if ( $id > 0 && $quantity > 0 ) {
+            $updated = \WishSuite\Frontend\Manage_Wishlist::instance()->update_product_quantity( $id, $quantity );
+            if ( $updated !== false ) {
+                wp_send_json_success( [
+                    'message' => __( 'Quantity updated successfully!', 'wishsuite' )
+                ] );
+            }
+        }
+        wp_send_json_error( [
+            'message' => __( 'Failed to update quantity!', 'wishsuite' )
+        ] );
+    }
 
 }
