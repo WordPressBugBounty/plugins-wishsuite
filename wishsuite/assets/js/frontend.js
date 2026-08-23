@@ -158,6 +158,7 @@
                         const {html, total_pages, current_page} = response.data;
 
                         $('.wishsuite-table-content').replaceWith(html);
+                        updateWishsuiteShareLinks();
                         $('.wishsuite-pagination .page-numbers').html(generatePagination(current_page ? +current_page : +currentPage, total_pages))
 
                         // Update url current page exist in response data.
@@ -212,7 +213,9 @@
 
     // Quantity
     var wishsuiteQuantityTimer = null;
-    $("div.wishsuite-table-content").on("change input", "input.qty", function() {
+    // Delegated from body: the table markup is replaced wholesale after an item is
+    // removed (replaceWith below), which would drop a handler bound to the container.
+    $body.on("change input", ".wishsuite-table-content input.qty", function() {
         var $input = $(this);
         $input.closest('tr').find( "[data-quantity]" ).attr( "data-quantity", this.value );
         updateWishsuiteShareLinks();
@@ -233,6 +236,15 @@
                     }
                 });
             }, 500);
+        }
+    });
+
+    // Themes (Kadence, etc.) add their own +/- steppers that set input.value directly.
+    // Re-trigger change so the save/rebuild path above runs even without a native event.
+    $body.on('click', '.wishsuite-table-content .quantity button, .wishsuite-table-content .quantity .qty-btn, .wishsuite-table-content .quantity a', function() {
+        var $qty = $(this).closest('.quantity').find('input.qty');
+        if ( $qty.length ) {
+            setTimeout(function() { $qty.trigger('change'); }, 0);
         }
     });
 
@@ -278,7 +290,11 @@
             if ( href ) $(this).attr('href', href);
         });
 
-        $share.find('.wishsuite-copy-link').attr('data-clipboard', shareUrl);
+        // Write both: jQuery caches data-* on first .data() read and ignores later
+        // .attr() writes, which would hand a stale URL to the copy button.
+        $share.find('.wishsuite-copy-link')
+            .attr('data-clipboard', shareUrl)
+            .data('clipboard', shareUrl);
     }
 
     // Delete table row after added to cart
@@ -507,7 +523,7 @@
     $body.on('click', '.wishsuite-copy-link', function(e) {
         e.preventDefault();
         const $btn = $(this);
-        const link = $btn.data('clipboard');
+        const link = $btn.attr('data-clipboard') || $btn.data('clipboard');
         if (!link) { return; }
 
         const original = $btn.data('tooltip') || '';

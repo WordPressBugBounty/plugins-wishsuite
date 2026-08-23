@@ -3,7 +3,7 @@ Contributors: htplugins, hasthemes, zenaulislam, aslamhasib
 Tags: woocommerce, wishlist, product wishlist, wishsuite, woocommerce wishlist
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 1.5.8
+Stable tag: 1.5.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -105,6 +105,11 @@ Needs assistance to use this plugin?
 Feel free to [Contact us](https://hasthemes.com/contact-us/)
 
 == Changelog ==
+
+= Version: 1.5.9 - Date: 2026-08-23 =
+* Fixed: Share and copy links now reflect the latest item quantity immediately, without needing a page refresh.
+* Fixed: Quantity changes stopped saving after removing an item from the wishlist table.
+* Fixed: Quantity plus/minus buttons added by themes now update the saved quantity and share links.
 
 = Version: 1.5.8 - Date: 2026-08-06 =
 * Added: Persistent wishlist item quantity updates across page refreshes for both registered users and guests.
