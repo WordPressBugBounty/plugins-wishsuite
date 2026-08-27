@@ -2,8 +2,8 @@
 Contributors: htplugins, hasthemes, zenaulislam, aslamhasib
 Tags: woocommerce, wishlist, product wishlist, wishsuite, woocommerce wishlist
 Requires at least: 5.0
-Tested up to: 7.0
-Stable tag: 1.5.9
+Tested up to: 7.1
+Stable tag: 1.5.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
@@ -105,6 +105,11 @@ Needs assistance to use this plugin?
 Feel free to [Contact us](https://hasthemes.com/contact-us/)
 
 == Changelog ==
+
+= Version: 1.5.10 - Date: 2026-08-27 =
+* Fixed: Recommended Plugins page grid collapsed to a single column on newer WordPress versions.
+* Fixed: A few minor issues.
+* Tested: Compatibility with the latest version of WordPress.
 
 = Version: 1.5.9 - Date: 2026-08-23 =
 * Fixed: Share and copy links now reflect the latest item quantity immediately, without needing a page refresh.
